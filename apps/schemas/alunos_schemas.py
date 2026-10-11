@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field, ConfigDict
-
+from typing import Literal
 # ==================================================================================
 # Criando Aluno Create
 # ==================================================================================
@@ -20,5 +20,8 @@ class AlunoResponse(BaseModel):
     plano: str
     ativo: bool
 # ==================================================================================
-
+# Atualizando Aluno
 # ==================================================================================
+class AlunoAtualizar(BaseModel):
+    idade: int = Field (gt = 0)
+    plano: Literal["básico", "intermediário", "pro"]

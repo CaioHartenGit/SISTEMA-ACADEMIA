@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status,HTTPException
-from apps.schemas.alunos_schemas import AlunoCreate, AlunoResponse
+from apps.schemas.alunos_schemas import AlunoCreate, AlunoResponse, AlunoAtualizar
 from apps.repositories.aluno_repository import AlunoRepository
 from apps.services.aluno_service import AlunoService
 
@@ -10,7 +10,7 @@ aluno_service = AlunoService(aluno_repository)
 router = APIRouter(prefix = "/alunos", tags = ["Alunos"])
 
 # Criar aluno 
-@router.post("/",status_code = status.HTTP_201_CREATED, response_model = AlunoResponse)
+@router.post("/",status_code = status.HTTP_201_CREATED, response_model = AlunoResponse,status_code = 201)
 def cadastrar_alunos(alunoCreate: AlunoCreate):
     cadastro_aluno = aluno_service.cadastrar(alunoCreate.nome,alunoCreate.idade,alunoCreate.plano)
     return cadastro_aluno
@@ -22,31 +22,36 @@ def listar_alunos():
     return listar_aluno
 
 # Buscar por ID
-@router.get("/{id_aluno}", response_model = AlunoResponse)
+@router.get("/{id_aluno}", response_model = AlunoResponse, status_code = 200)
 def buscar_por_id(id_aluno: int):
     aluno_por_id = aluno_service.buscar_por_id(id_aluno)
+    if aluno_por_id is None:
+        raise HTTPException(
+            status_code = status.HTTP_404_NOT_FOUND,
+            detail = "ID não encontrado"
+        )
     return aluno_por_id
 
 # Buscar por Nome
-@router.get("/nome/{nome}", response_model = list [AlunoResponse])
+@router.get("/nome/{nome}", response_model = list [AlunoResponse],status_code = 200)
 def buscar_por_nome(nome: str):
     aluno_por_nome = aluno_service.buscar_por_nome(nome)
     return aluno_por_nome
 
 # Buscar por Plano
-@router.get("/plano/{plano}", response_model = list [AlunoResponse])
+@router.get("/plano/{plano}", response_model = list [AlunoResponse],status_code = 200)
 def buscar_por_plano(plano: str):
     aluno_por_plano = aluno_service.buscar_por_plano(plano)
     return aluno_por_plano
 
 # Atualizar Aluno
-@router.put("/{id_aluno}", response_model = AlunoResponse)
-def atualizar_aluno(id_aluno: int, NovoAluno: AlunoCreate):
+@router.put("/{id_aluno}", response_model = AlunoResponse, status_code = 200)
+def atualizar_aluno(id_aluno: int, NovoAluno: AlunoAtualizar):
     atualiza_aluno = aluno_service.atualizar(NovoAluno.nome, NovoAluno.idade, NovoAluno.plano, id_aluno)
     return atualiza_aluno
 
 # Deletar Aluno
-@router.delete("/{id_aluno}", response_model = AlunoResponse)
+@router.delete("/{id_aluno}", response_model = AlunoResponse,status_code = 200)
 def deletar_aluno(id_aluno: int):
     deleta_aluno = aluno_service.deletar(id_aluno)
     if deleta_aluno is None:
