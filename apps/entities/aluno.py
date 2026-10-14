@@ -68,3 +68,11 @@ class Aluno:
             raise ValueError("Ativo deve ser True ou False")
 
         self._ativo = novoAtivo
+
+
+# ===========================================================================
+# Validando Dados
+# ==========================================================================
+class AlunoCreate(Aluno):
+    def __init__(self,nome,idade,plano):
+        super().__init__(None, nome,idade,plano)

@@ -1,4 +1,4 @@
-from apps.entities.aluno import Aluno
+from apps.entities.aluno import Aluno, AlunoCreate
 from apps.repositories.aluno_repository import AlunoRepository
 
 class AlunoService:
@@ -18,7 +18,7 @@ class AlunoService:
     )
 
     def cadastrar(self, nome, idade, plano):
-        aluno = Aluno(None, nome, idade, plano)
+        aluno = AlunoCreate( nome, idade, plano)
 
         dados = self.repository.inserir(
             aluno.nome,
