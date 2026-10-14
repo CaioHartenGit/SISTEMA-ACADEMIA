@@ -16,6 +16,13 @@ class AlunoService:
             dados["ativo"]
     
     )
+    @staticmethod
+    def _converter_alunoCreate(dados):
+        return AlunoCreate(
+            dados["nome"],
+            dados["idade"],
+            dados["plano"]
+        )
 
     def cadastrar(self, nome, idade, plano):
         aluno = AlunoCreate( nome, idade, plano)
@@ -26,7 +33,7 @@ class AlunoService:
             aluno.plano
         )
 
-        return self._converter_aluno(dados)
+        return self._converter_alunoCreate(dados)
 
     def listar(self):
         alunos = self.repository.listar()

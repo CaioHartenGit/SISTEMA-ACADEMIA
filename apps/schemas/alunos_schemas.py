@@ -19,11 +19,6 @@ class AlunoResponse(BaseModel):
     idade: int
     plano: str
     ativo: bool
-# ==================================================================================
-# Atualizando Aluno
-# ==================================================================================
-class AlunoAtualizar(BaseModel):
-    idade: int = Field (gt = 0)
-    plano: Literal["básico", "intermediário", "pro"]
+
 
 

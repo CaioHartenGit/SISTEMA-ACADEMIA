@@ -11,7 +11,7 @@ aluno_service = AlunoService(aluno_repository)
 router = APIRouter(prefix = "/alunos", tags = ["Alunos"])
 
 # Criar aluno 
-@router.post("/",status_code = status.HTTP_201_CREATED, response_model = AlunoResponse)
+@router.post("/",status_code = status.HTTP_201_CREATED, response_model = AlunoCreate)
 def cadastrar_alunos(alunoCreate: AlunoCreate):
     cadastro_aluno = aluno_service.cadastrar(
         alunoCreate.nome,
@@ -59,7 +59,7 @@ def buscar_por_plano(plano: Literal["básico", "intermediário", "pro"]):
 
 # Atualizar Aluno
 @router.put("/{id_aluno}", response_model = AlunoResponse, status_code = 200)
-def atualizar_aluno(id_aluno: int, NovoAluno: AlunoAtualizar):
+def atualizar_aluno(id_aluno: int, NovoAluno: AlunoCreate):
     atualiza_aluno = aluno_service.atualizar(NovoAluno.nome, NovoAluno.idade, NovoAluno.plano, id_aluno)
     if atualiza_aluno is None:
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = "Aluno não foi atualizado")
@@ -94,7 +94,6 @@ def ativar_aluno(id_aluno: int):
             detail = mensagem,
         )
     
-
 #  Desativar Aluno
 @router.patch("/{id_aluno}/desativar", response_model = AlunoResponse, status_code = 200 )
 def desativar_aluno(id_aluno: int):
