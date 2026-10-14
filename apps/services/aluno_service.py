@@ -1,4 +1,4 @@
-from apps.entities.aluno import Aluno, AlunoCreate
+from apps.entities.aluno import Aluno, AlunoCreate, AlunoAtualizar
 from apps.repositories.aluno_repository import AlunoRepository
 
 class AlunoService:
@@ -20,6 +20,13 @@ class AlunoService:
     def _converter_alunoCreate(dados):
         return AlunoCreate(
             dados["nome"],
+            dados["idade"],
+            dados["plano"]
+        )
+
+    @staticmethod
+    def _converter_alunoAtualizar(dados):
+        return AlunoAtualizar(
             dados["idade"],
             dados["plano"]
         )
@@ -55,9 +62,8 @@ class AlunoService:
             for dados in self.repository.buscar_por_plano(plano)
         ]
 
-    def atualizar(self, nome, idade, plano, id_aluno):
+    def atualizar(self,idade, plano, id_aluno):
         dados = self.repository.atualizar(
-            nome,
             idade,
             plano,
             id_aluno

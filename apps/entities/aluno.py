@@ -75,3 +75,7 @@ class Aluno:
 class AlunoCreate(Aluno):
     def __init__(self,nome,idade,plano):
         super().__init__(None, nome,idade,plano)
+
+class AlunoAtualizar(Aluno):
+    def __init__(self,idade,plano):
+        super().__init__(None,None,idade,plano)

@@ -16,7 +16,8 @@ def cadastrar_alunos(alunoCreate: AlunoCreate):
     cadastro_aluno = aluno_service.cadastrar(
         alunoCreate.nome,
         alunoCreate.idade,
-        alunoCreate.plano)
+        alunoCreate.plano
+        )
  
     
     return cadastro_aluno
@@ -59,8 +60,8 @@ def buscar_por_plano(plano: Literal["básico", "intermediário", "pro"]):
 
 # Atualizar Aluno
 @router.put("/{id_aluno}", response_model = AlunoResponse, status_code = 200)
-def atualizar_aluno(id_aluno: int, NovoAluno: AlunoCreate):
-    atualiza_aluno = aluno_service.atualizar(NovoAluno.nome, NovoAluno.idade, NovoAluno.plano, id_aluno)
+def atualizar_aluno(id_aluno: int, NovoAluno: AlunoAtualizar):
+    atualiza_aluno = aluno_service.atualizar(NovoAluno.idade, NovoAluno.plano, id_aluno)
     if atualiza_aluno is None:
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = "Aluno não foi atualizado")
     return atualiza_aluno

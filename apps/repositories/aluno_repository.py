@@ -84,7 +84,7 @@ class AlunoRepository:
             cursor.close()
             conn.close()
 
-    def atualizar(self, nome, idade, plano, id_aluno):
+    def atualizar(self, idade, plano, id_aluno):
 
         conn = Conectar.conectar()
         cursor = conn.cursor(row_factory=dict_row)
@@ -94,13 +94,12 @@ class AlunoRepository:
             cursor.execute(
                 """
                 UPDATE aluno
-                SET nome = %s,
-                    idade = %s,
+                SET  idade = %s,
                     plano = %s
                 WHERE id = %s
                 RETURNING id, nome, idade, plano, ativo
                 """,
-                (nome, idade, plano, id_aluno)
+                (idade, plano, id_aluno)
             )
 
             aluno = cursor.fetchone()
