@@ -2,6 +2,7 @@ from fastapi import APIRouter, status,HTTPException
 from apps.schemas.alunos_schemas import AlunoCreate, AlunoResponse, AlunoAtualizar
 from apps.repositories.aluno_repository import AlunoRepository
 from apps.services.aluno_service import AlunoService
+from typing import Literal
 
 
 aluno_repository = AlunoRepository()
@@ -10,16 +11,24 @@ aluno_service = AlunoService(aluno_repository)
 router = APIRouter(prefix = "/alunos", tags = ["Alunos"])
 
 # Criar aluno 
-@router.post("/",status_code = status.HTTP_201_CREATED, response_model = AlunoResponse,status_code = 201)
+@router.post("/",status_code = status.HTTP_201_CREATED, response_model = AlunoResponse)
 def cadastrar_alunos(alunoCreate: AlunoCreate):
-    cadastro_aluno = aluno_service.cadastrar(alunoCreate.nome,alunoCreate.idade,alunoCreate.plano)
+    cadastro_aluno = aluno_service.cadastrar(
+        alunoCreate.nome,
+        alunoCreate.idade,
+        alunoCreate.plano)
+ 
+    
     return cadastro_aluno
 
 # Listar Alunos no Banco - PostgtesSQL
 @router.get("/", response_model = list [AlunoResponse])
 def listar_alunos():
     listar_aluno = aluno_service.listar()
+    if listar_aluno == []:
+        raise HTTPException( status_code = status.HTTP_200_OK, detail = "Não tem Alunos cadastrados no sistema")
     return listar_aluno
+    
 
 # Buscar por ID
 @router.get("/{id_aluno}", response_model = AlunoResponse, status_code = 200)
@@ -36,18 +45,24 @@ def buscar_por_id(id_aluno: int):
 @router.get("/nome/{nome}", response_model = list [AlunoResponse],status_code = 200)
 def buscar_por_nome(nome: str):
     aluno_por_nome = aluno_service.buscar_por_nome(nome)
+    if aluno_por_nome == []:
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = "Aluno não encontrado")
     return aluno_por_nome
 
 # Buscar por Plano
 @router.get("/plano/{plano}", response_model = list [AlunoResponse],status_code = 200)
-def buscar_por_plano(plano: str):
+def buscar_por_plano(plano: Literal["básico", "intermediário", "pro"]):
     aluno_por_plano = aluno_service.buscar_por_plano(plano)
+    if aluno_por_plano == []:
+        raise HTTPException(status_code = status.HTTP_200_OK, detail = "Plano não encontrado")
     return aluno_por_plano
 
 # Atualizar Aluno
 @router.put("/{id_aluno}", response_model = AlunoResponse, status_code = 200)
 def atualizar_aluno(id_aluno: int, NovoAluno: AlunoAtualizar):
     atualiza_aluno = aluno_service.atualizar(NovoAluno.nome, NovoAluno.idade, NovoAluno.plano, id_aluno)
+    if atualiza_aluno is None:
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = "Aluno não foi atualizado")
     return atualiza_aluno
 
 # Deletar Aluno
@@ -61,111 +76,38 @@ def deletar_aluno(id_aluno: int):
         )
     return deleta_aluno
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-from fastapi import FastAPI,HTTPException,status
-from apps.repositories.aluno_repository import AlunoRepository
-from apps.services.aluno_service import AlunoService
-from apps.schemas.alunos_schemas import AlunoCreate
-
-app = FastAPI()
-
-aluno_repository = AlunoRepository()
-aluno_service = AlunoService(aluno_repository)
-
-# Buscar por ID
-@app.get("/alunos/{id_aluno}")
-def buscar_por_id(id_aluno: int):
-    aluno = aluno_service.buscar_por_id(id_aluno)
-    if aluno is None:
-        raise HTTPException(status_code = 404, detail = "ID aluno não encontrado")
-    return aluno
-
-# Listar Alunos no Banco - PostgresSQL
-@app.get("/alunos")
-def listar_alunos():
-    alunos = aluno_service.listar()
-    return alunos
-
-# Criando aluno
-@app.post("/alunos",status_code=status.HTTP_201_CREATED)
-def cadastrar_alunos(alunoEntrada: AlunoCreate):
-    cadastro = aluno_service.cadastrar(alunoEntrada.nome,alunoEntrada.idade,alunoEntrada.plano)
-    return cadastro
-
-# Atualizando aluno
-@app.put("/alunos/{id_aluno}")
-def atualizar_aluno(id_aluno: int, alunoEntrada: AlunoCreate):
-    atualizar_aluno = aluno_service.atualizar(alunoEntrada.nome,alunoEntrada.idade,alunoEntrada.plano,id_aluno)
-    if atualizar_aluno is None:
-        raise HTTPException( status_code = 404 , detail = "Não foi possivel atualizar o Aluno")
-    return atualizar_aluno
-
-# Deletando aluno no Sistema
-@app.delete("/alunos/{id_aluno}")
-def deletar_aluno(id_aluno: int):
-    deleta = aluno_service.deletar(id_aluno)
-    if deleta is not None:
-        return{
-            "Mensagem": "Aluno deletado com sucesso",
-        }
-    else:
-       raise HTTPException(
-           status_code = 404,
-           detail = "Aluno não foi encontrado!"
-       )
-
-# Ativando aluno no Sistema
-@app.patch("/alunos/{id_aluno}/ativar")
+#  Ativar Aluno
+@router.patch("/{id_aluno}/ativar", response_model = AlunoResponse, status_code = 200 )
 def ativar_aluno(id_aluno: int):
-    ativar = aluno_service.ativar(id_aluno)
-    if ativar is not None:
-        return{
-            "Mensagem": "Aluno ativado com sucesso"
-        }
-    else:
-        return{
-            "Mensagem": "Aluno não encontrado"
-        }
+    try:
+        return aluno_service.ativar(id_aluno)
 
-# Desativando aluno no Sistema
-@app.patch("/alunos/{id_aluno}/desativar")
+    except ValueError as erro:
+        mensagem = str(erro)
+        if mensagem == "Aluno não encontrado":
+            raise HTTPException(
+                status_code = status.HTTP_404_NOT_FOUND,
+                detail = mensagem,
+            )
+        raise HTTPException(
+            status_code = status.HTTP_409_CONFLICT,
+            detail = mensagem,
+        )
+    
+
+#  Desativar Aluno
+@router.patch("/{id_aluno}/desativar", response_model = AlunoResponse, status_code = 200 )
 def desativar_aluno(id_aluno: int):
-    desativar = aluno_service.desativar(id_aluno)
-    if desativar is not None:
-        return{
-            "Mensagem": "Aluno desativado com sucesso"
-        }
-    else:
-        return{
-            "Mensagem": "Aluno não encontrado"
-        }
-'''
+    try:
+        return aluno_service.desativar(id_aluno)
+    except ValueError as erro:
+        mensagem = str(erro)
+        if mensagem == "Aluno não encontrado":
+            raise HTTPException(
+                status_code = status.HTTP_404_NOT_FOUND,
+                detail = mensagem,
+            )
+        raise HTTPException(
+            status_code = status.HTTP_409_CONFLICT,
+            detail = mensagem
+        )
