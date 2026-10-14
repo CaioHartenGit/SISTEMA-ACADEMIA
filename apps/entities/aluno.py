@@ -50,7 +50,7 @@ class Aluno:
         if not isinstance(novoPlano, str):
             raise ValueError("Escreva corretamente seu plano")
 
-        novoPlano = novoPlano.strip()
+        novoPlano = novoPlano.strip().lower()
 
         if novoPlano.lower() not in ("básico", "intermediário", "pro"):
             raise ValueError("Plano inválido! Verifique e tente novamente")

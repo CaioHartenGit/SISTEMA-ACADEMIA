@@ -236,7 +236,7 @@ class AlunoRepository:
     def buscar_por_nome(self, nome):
 
         conn = Conectar.conectar()
-        cursor = conn.cursor(row_factory=dict_row)
+        cursor = conn.cursor(row_factory = dict_row)
 
         try:
 

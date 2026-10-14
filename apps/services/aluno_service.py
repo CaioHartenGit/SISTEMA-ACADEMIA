@@ -14,6 +14,7 @@ class AlunoService:
             dados["idade"],
             dados["plano"],
             dados["ativo"]
+    
     )
 
     def cadastrar(self, nome, idade, plano):
@@ -66,9 +67,23 @@ class AlunoService:
         return self._converter_aluno(dados)
 
     def ativar(self, id_aluno):
+        Verificacao = self.buscar_por_id(id_aluno)
+        if Verificacao is None:
+            raise ValueError("Aluno não encontrado")
+        if Verificacao.ativo is True:
+            raise ValueError("Aluno já está ativo")
+        
         dados = self.repository.ativar(id_aluno)
         return self._converter_aluno(dados)
+    
 
     def desativar(self, id_aluno):
+        VERIFICAÇÃO = self.buscar_por_id(id_aluno)
+        if VERIFICAÇÃO is None:
+            raise ValueError("Aluno não encontrado")
+        if VERIFICAÇÃO.ativo is False:
+            raise ValueError("Aluno já está desativado")
+        
         dados = self.repository.desativar(id_aluno)
         return self._converter_aluno(dados)
+    

@@ -6,7 +6,7 @@ from typing import Literal
 class AlunoCreate(BaseModel):
     nome: str = Field( min_length = 1, max_length = 100)
     idade: int = Field( gt = 0)
-    plano: str 
+    plano: Literal["básico", "intermediário", "pro"]
 
 # ==================================================================================
 # Criando Aluno Response
@@ -25,3 +25,5 @@ class AlunoResponse(BaseModel):
 class AlunoAtualizar(BaseModel):
     idade: int = Field (gt = 0)
     plano: Literal["básico", "intermediário", "pro"]
+
+
