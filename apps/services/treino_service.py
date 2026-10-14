@@ -1,4 +1,4 @@
-from apps.entities.treino import Treino
+from apps.entities.treino import Treino, TreinoCreate, TreinoAtualizar
 from apps.repositories.treino_repository import TreinoRepository
 
 
@@ -8,7 +8,7 @@ class TreinoService:
         self.repository = repository
 
     def cadastrar(self, nome, dia_semana, id_aluno):
-        treino = Treino(None, nome, dia_semana, id_aluno)
+        treino = TreinoCreate(nome, dia_semana, id_aluno)
 
         user = self.repository.inserir_Cadastrar(
             treino.nome,
@@ -26,15 +26,23 @@ class TreinoService:
         treinos = self.repository.buscar_por_id(id_aluno)
         return treinos
 
-    def alterar(self, id_aluno, dia_semana, NOVODIADASEMANA):
+    def alterar(self, id_aluno, dia_semana, novo_dia_semana):
         treinos = self.repository.alterar_treino(
             id_aluno,
             dia_semana,
-            NOVODIADASEMANA
+            novo_dia_semana
         )
 
         return treinos
 
-    def deletar(self, id_aluno):
-        treinos = self.repository.delete_treino(id_aluno)
-        return treinos
+    def deletar(self, id_treino):
+        treinos = self.repository.delete_treino(id_treino)
+        if treinos == True:
+            return{
+                "Mensagem": "Treino deletado com sucesso"
+            }
+        else:
+            return{
+                "Mensagem": "Treino não foi deletado"
+            }
+      

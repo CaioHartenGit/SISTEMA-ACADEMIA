@@ -88,6 +88,9 @@ python3 -m fastapi dev apps/main.py
 python3 -m fastapi dev apps/routers/exerciciosAPI.py
 ```
 
+# INCIANDO O SERVIDOR
+PYTHONPATH="$(pwd)" fastapi dev apps/main.py
+
 **Por que executar como módulo?**
 
 Essa forma de inicialização permite executar o FastAPI pelo ambiente Python selecionado e, no nosso projeto, resolveu o problema de importação dos módulos `apps.*`.

@@ -4,6 +4,11 @@ from apps.repositories.treino_repository import TreinoRepository
 from apps.services.treino_service import TreinoService
 from apps.repositories.exercicio_repository import ExercicioRepository
 from apps.services.exercicio_service import ExercicioService
+
+
+from fastapi import FastAPI, HTTPException
+from routers.alunos_routers import router as aluno_router
+from routers.treinos_routers import router as treino_router
 # ============================================================
 # REPOSITORIES
 # ============================================================
@@ -19,6 +24,29 @@ exercicio_service = ExercicioService(exercicio_repository)
 # ===========================================================
 # FUNÇÕES AUXILIARES
 # ============================================================
+
+
+
+
+
+
+
+
+
+app = FastAPI()
+app.include_router(aluno_router)
+app.include_router(treino_router)
+
+
+
+
+
+
+
+
+
+
+'''
 def pausar():
     input("\n        Pressione ENTER para continuar...")
 def titulo(texto):
@@ -417,3 +445,4 @@ def menu_principal():
 # ============================================================
 if __name__ == "__main__":
     menu_principal()
+'''

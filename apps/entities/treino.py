@@ -51,3 +51,19 @@ class Treino:
             raise ValueError("Quantidade de caracteres excedida")
         self._dia_semana = novoDiaSemana
         
+
+
+# ===========================================================================
+# Validando Dados
+# ==========================================================================
+
+class TreinoCreate(Treino):
+    def __init__(self,nome,dia_semana,id_aluno):
+        super().__init__(None,nome,dia_semana,id_aluno)
+
+
+class TreinoAtualizar(Treino):
+    def __init__(self,nome,dia_semana,id_aluno,novo_dia_semana):
+        super().__init(None,nome,dia_semana,id_aluno)
+        self.novo_dia_semana = novo_dia_semana
+
