@@ -48,6 +48,8 @@ class AlunoService:
 
     def buscar_por_id(self, id_aluno):
         dados = self.repository.buscar_por_id(id_aluno)
+        if dados == None:
+            return None
         return self._converter_aluno(dados)
 
     def buscar_por_nome(self, nome):

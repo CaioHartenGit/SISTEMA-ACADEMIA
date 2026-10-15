@@ -13,35 +13,43 @@ router = APIRouter(prefix = "/alunos", tags = ["Alunos"])
 # Criar aluno 
 @router.post("/",status_code = status.HTTP_201_CREATED, response_model = AlunoCreate)
 def cadastrar_alunos(alunoCreate: AlunoCreate):
-    cadastro_aluno = aluno_service.cadastrar(
-        alunoCreate.nome,
-        alunoCreate.idade,
-        alunoCreate.plano
+    try:
+        cadastro_aluno = aluno_service.cadastrar(
+            alunoCreate.nome,
+            alunoCreate.idade,
+            alunoCreate.plano
         )
- 
-    
-    return cadastro_aluno
+        return cadastro_aluno
+    except ValueError as erro:
+        raise HTTPException(
+            status_code = status.HTTP_400_BAD_REQUEST,
+            detail = str(erro)
+        )
 
 # Listar Alunos no Banco - PostgtesSQL
 @router.get("/", response_model = list [AlunoResponse])
 def listar_alunos():
     listar_aluno = aluno_service.listar()
     if listar_aluno == []:
-        raise HTTPException( status_code = status.HTTP_200_OK, detail = "Não tem Alunos cadastrados no sistema")
+       return []
     return listar_aluno
     
-
 # Buscar por ID
 @router.get("/{id_aluno}", response_model = AlunoResponse, status_code = 200)
 def buscar_por_id(id_aluno: int):
-    aluno_por_id = aluno_service.buscar_por_id(id_aluno)
-    if aluno_por_id is None:
+    try:
+        aluno_por_id = aluno_service.buscar_por_id(id_aluno)
+        if aluno_por_id is None:
+            raise HTTPException(
+                status_code = status.HTTP_404_NOT_FOUND,
+                detail = "Aluno não encontrado"
+            )
+        return aluno_por_id
+    except ValueError as erro:
         raise HTTPException(
-            status_code = status.HTTP_404_NOT_FOUND,
-            detail = "ID não encontrado"
+            status_code = status.HTTP_400_BAD_REQUEST,
+            detail = str(erro)
         )
-    return aluno_por_id
-
 # Buscar por Nome
 @router.get("/nome/{nome}", response_model = list [AlunoResponse],status_code = 200)
 def buscar_por_nome(nome: str):
@@ -55,7 +63,7 @@ def buscar_por_nome(nome: str):
 def buscar_por_plano(plano: Literal["básico", "intermediário", "pro"]):
     aluno_por_plano = aluno_service.buscar_por_plano(plano)
     if aluno_por_plano == []:
-        raise HTTPException(status_code = status.HTTP_200_OK, detail = "Plano não encontrado")
+        return []
     return aluno_por_plano
 
 # Atualizar Aluno

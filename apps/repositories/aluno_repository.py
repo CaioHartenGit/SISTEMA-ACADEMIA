@@ -76,7 +76,6 @@ class AlunoRepository:
             )
 
             aluno = cursor.fetchone()
-
             return aluno
 
         finally:
