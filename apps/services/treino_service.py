@@ -27,22 +27,19 @@ class TreinoService:
         return treinos
 
     def alterar(self, id_aluno, dia_semana, novo_dia_semana):
-        treinos = self.repository.alterar_treino(
-            id_aluno,
-            dia_semana,
-            novo_dia_semana
-        )
-
+        try:
+            treinos = self.repository.alterar_treino(
+                id_aluno,
+                dia_semana,
+                novo_dia_semana
+            )
+            
+        except ValueError:
+            if treinos is None:
+                return None
+            
         return treinos
 
     def deletar(self, id_treino):
-        treinos = self.repository.delete_treino(id_treino)
-        if treinos == True:
-            return{
-                "Mensagem": "Treino deletado com sucesso"
-            }
-        else:
-            return{
-                "Mensagem": "Treino não foi deletado"
-            }
-      
+        return self.repository.delete_treino(id_treino)
+        

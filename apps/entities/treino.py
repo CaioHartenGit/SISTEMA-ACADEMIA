@@ -27,8 +27,8 @@ class Treino:
 
     @id_aluno.setter
     def id_aluno(self,NovoID):
-        if not isinstance(NovoID, int):
-            raise ValueError("ID aluno precisa ser válido")
+        if isinstance(NovoID, bool) or not isinstance(NovoID, int):
+            raise ValueError("ID aluno precisa ser um número inteiro válido")
         if NovoID <= 0:
             raise ValueError("O ID aluno não pode ser negativo")
         self._id_aluno = NovoID
@@ -37,22 +37,28 @@ class Treino:
     def dia_semana(self):
         return self._dia_semana
     
-   
+    
     @dia_semana.setter
     def dia_semana(self, novoDiaSemana):
+        DIAVALIDO = [
+            "segunda", "terça", "quarta", "quinta",
+            "sexta", "sabado", "domingo"
+        ]
         if not isinstance(novoDiaSemana, str):
-            raise ValueError("Dia da semana inválido")
+            raise ValueError("Informe corretamente o dia da semana")
         novoDiaSemana = novoDiaSemana.strip().lower()
         if novoDiaSemana.endswith("-feira"):
             novoDiaSemana = novoDiaSemana.replace("-feira", "")
+        if novoDiaSemana == "sábado":
+            novoDiaSemana = "sabado"
         if novoDiaSemana == "":
             raise ValueError("Dia da semana não pode ser vazio")
         if len(novoDiaSemana) > 20:
             raise ValueError("Quantidade de caracteres excedida")
+        if novoDiaSemana not in DIAVALIDO:
+            raise ValueError("Dia da semana inválido!")
         self._dia_semana = novoDiaSemana
         
-
-
 # ===========================================================================
 # Validando Dados
 # ==========================================================================

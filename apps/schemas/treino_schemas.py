@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field, ConfigDict, field_validator
 from typing import Literal
 
 
@@ -30,4 +30,17 @@ class TreinoResponse(BaseModel):
 class TreinoAtualizar(BaseModel):
     nome: str = Field(min_length = 5, max_length = 100)
     novo_dia_semana: str = Field(min_length = 5, max_length = 100)
+
+    @field_validator("novo_dia_semana", mode = "before")
+    @classmethod
+    def normalizar_dia(cls, valor):
+        if isinstance(valor, str):
+            valor = valor.strip().lower()
+            if valor == "sábado":
+                valor = "sabado"
+
+            if valor.endswith("-feira"):
+                valor = valor.replace("-feira", "")
+
+        return valor
 

@@ -65,7 +65,7 @@ class TreinoRepository:
             cursor.close()
             conn.close()
 
-    def alterar_treino(self, id_aluno, nome, novo_dia_semana):
+    def alterar_treino(self, id_aluno, nome,novo_dia_semana):
         conn = Conectar.conectar()
         cursor = conn.cursor(row_factory=dict_row)
         try:
@@ -98,13 +98,17 @@ class TreinoRepository:
 
             DELETE FROM treino
             WHERE id = %s
+            RETURNING id
             ''',(id_treino,)
             )
+            treino = cursor.fetchone()
+            if treino is None:
+                return False
             conn.commit()
             return True
         except Exception:
             conn.rollback()
-            return False 
+            raise
         finally:
             cursor.close()
             conn.close()
