@@ -1,105 +1,133 @@
 # 🏋️ Sistema de Academia
 
-Sistema de gerenciamento de academia desenvolvido em **Python** com **PostgreSQL**, utilizando **Programação Orientada a Objetos (POO)** e uma arquitetura organizada em camadas.
+Projeto de desenvolvimento de uma API REST para gerenciamento de uma academia, utilizando Python, FastAPI e PostgreSQL.
 
-O projeto tem como objetivo colocar em prática conceitos de desenvolvimento de software, banco de dados, CRUD, POO, separação de responsabilidades e integração entre aplicação e banco de dados.
-
----
+Este é um projeto de aprendizado prático com foco no desenvolvimento backend, na organização do código em camadas e na comunicação com um banco de dados relacional.
 
 ## 🚀 Tecnologias utilizadas
 
-| Tecnologia | Utilização |
-|---|---|
-| 🐍 Python | Linguagem principal |
-| 🐘 PostgreSQL | Banco de dados |
-| 🔌 Psycopg | Conexão entre Python e PostgreSQL |
-| 🧱 POO | Organização e modelagem das entidades |
-| 🗃️ SQL | Operações no banco de dados |
-| 🔀 Git | Controle de versão |
-| 🌐 GitHub | Hospedagem do projeto |
+- **Python** — linguagem de programação.
+- **FastAPI** — criação das rotas e desenvolvimento da API REST.
+- **PostgreSQL** — banco de dados relacional.
+- **Psycopg 3** — conexão e execução de operações no PostgreSQL.
+- **Pydantic** — definição de schemas e validação dos dados.
+- **Git e GitHub** — controle de versão e compartilhamento do código.
 
----
-
-## 📌 Funcionalidades
+## 📌 Funcionalidades implementadas
 
 ### 👤 Alunos
-
-- Cadastrar aluno
-- Listar alunos
-- Buscar aluno por ID
-- Buscar aluno por nome
-- Buscar alunos por plano
-- Atualizar dados do aluno
-- Ativar aluno
-- Desativar aluno
-- Excluir aluno
+- Rotas para operações de gerenciamento de alunos.
+- Validação dos dados recebidos.
+- Tratamento de erros nas operações implementadas.
 
 ### 🏋️ Treinos
-
-- Cadastrar treino
-- Listar treinos
-- Buscar treinos de um aluno
-- Alterar dia do treino
-- Excluir treinos
+- Rotas para operações de gerenciamento de treinos.
+- Integração com o banco de dados.
+- Validação de dados e tratamento de erros.
 
 ### 💪 Exercícios
+- Rotas para criar, listar, atualizar e excluir exercícios.
+- Associação dos exercícios aos treinos.
+- Validação dos dados recebidos.
+- Tratamento de erros nas operações implementadas.
 
-- Cadastrar exercício
-- Listar exercícios de um treino
-- Atualizar exercício
-- Excluir exercício
+### 🗄️ Banco de dados
+- Utilização do PostgreSQL.
+- Persistência dos dados por meio do repositório.
+- Revisão da estrutura e dos relacionamentos necessários para o projeto.
+
+## 🧱 Organização do projeto
+
+O código está organizado em camadas para separar as responsabilidades da aplicação:
+
+- **Routers:** definem os endpoints e recebem as requisições HTTP.
+- **Schemas:** definem os formatos e as validações dos dados.
+- **Services:** concentram a lógica das operações.
+- **Repositories:** realizam as operações de acesso ao banco de dados.
+- **Entidades:** representam os objetos utilizados na lógica do sistema.
+
+A estrutura busca facilitar a leitura, a manutenção e a evolução do código.
+
+## ⚙️ Como executar o projeto
+
+### 1. Pré-requisitos
+
+- Python instalado.
+- PostgreSQL instalado e em execução.
+- Banco de dados criado e configurado conforme as necessidades da aplicação.
+- Git instalado.
+
+### 2. Clonar o repositório
+
+```bash
+git clone URL_DO_REPOSITORIO
+cd SISTEMA-ACADEMIA
+```
+
+Substitua `URL_DO_REPOSITORIO` pelo endereço real do repositório no GitHub.
+
+### 3. Criar e ativar um ambiente virtual
+
+No macOS ou Linux:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 4. Instalar as dependências
+
+Se o projeto possui um arquivo `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Caso as dependências ainda não estejam registradas nesse arquivo, instale as que o projeto utiliza conforme a configuração atual.
+
+### 5. Configurar o banco de dados
+
+Configure as credenciais e os parâmetros de conexão do PostgreSQL de acordo com o método utilizado pela aplicação.
+
+Não compartilhe senhas ou outras credenciais no repositório.
+
+### 6. Iniciar a API
+
+A partir da pasta raiz do projeto:
+
+```bash
+PYTHONPATH="$(pwd)" fastapi dev apps/main.py
+```
+
+### 7. Acessar a documentação
+
+Com a aplicação em execução, acesse:
+
+- **Swagger UI:** http://127.0.0.1:8000/docs
+- **OpenAPI:** http://127.0.0.1:8000/openapi.json
+
+A documentação permite consultar os endpoints e realizar requisições manualmente.
+
+## 🧪 Testes
+
+Durante o desenvolvimento, as rotas e os tratamentos de erro são verificados manualmente, utilizando a documentação interativa da API.
+
+A implementação de testes automatizados será considerada em projetos futuros, com uma arquitetura definida previamente para essa finalidade.
+
+## 🔜 Próximas etapas
+
+- [ ] Desenvolver o frontend.
+- [ ] Integrar a interface com a API.
+- [ ] Realizar testes manuais do fluxo completo da aplicação.
+- [ ] Preparar e configurar o ambiente de produção.
+- [ ] Publicar a aplicação por meio de deploy.
+
+## 🎯 Objetivo do projeto
+
+Consolidar conhecimentos práticos de desenvolvimento backend, construção de APIs REST, validação de dados, tratamento de erros, organização em camadas e integração com bancos de dados relacionais.
+
+O projeto também serve como base de aprendizado para aplicações futuras, nas quais será possível definir previamente uma arquitetura mais consistente e incorporar testes automatizados desde o início.
 
 ---
 
-## 🧠 Arquitetura
-
-O projeto foi organizado utilizando uma separação de responsabilidades entre:
-
-```text
-Interface
-   ↓
-Service
-   ↓
-Repository
-   ↓
-PostgreSQL
-```
-
-## ▶️ Executando
-
-Na raiz do projeto, inicie o menu com:
-
-```bash
-python3 -m apps.main
-```
-Execute como módulo para que os imports `apps.*` sejam resolvidos corretamente.
-
-## Desenvolvendo com FastAPI
-
-### Iniciar o servidor
-
-Execute o comando abaixo na raiz do projeto `SISTEMA-ACADEMIA`:
-
-```bash
-#alunos:
-python3 -m fastapi dev apps/main.py
-
-# exercicio:
-python3 -m fastapi dev apps/routers/exerciciosAPI.py
-```
-
-# INCIANDO O SERVIDOR
-PYTHONPATH="$(pwd)" fastapi dev apps/main.py
-
-**Por que executar como módulo?**
-
-Essa forma de inicialização permite executar o FastAPI pelo ambiente Python selecionado e, no nosso projeto, resolveu o problema de importação dos módulos `apps.*`.
-
-### Acessar a documentação
-
-Com o servidor em execução, acesse:
-
-* **Swagger UI:** http://127.0.0.1:8000/docs
-* **OpenAPI JSON:** http://127.0.0.1:8000/openapi.json
-
-Para encerrar o servidor, pressione `Ctrl + C` no terminal.
+**Status:** Backend implementado; frontend e deploy planejados.
