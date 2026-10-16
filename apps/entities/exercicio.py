@@ -58,4 +58,13 @@ class Exercicio:
             raise ValueError("ID treino não pode ser negativo")
         self._id_treino = id_treino
 
+
+
+# ===========================================================================
+# Validando Dados
+# ==========================================================================
+class ExercicioCreate(Exercicio):
+    def __init__(self,nome,serie,repeticoes,id_treino):
+        super().__init__(None,nome,serie,repeticoes,id_treino)
+
   

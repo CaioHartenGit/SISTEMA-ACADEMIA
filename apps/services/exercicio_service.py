@@ -1,4 +1,4 @@
-from apps.entities.exercicio import Exercicio
+from apps.entities.exercicio import Exercicio, ExercicioCreate
 from apps.repositories.exercicio_repository import ExercicioRepository
 
 class ExercicioService:
@@ -7,8 +7,7 @@ class ExercicioService:
         self.repository = repository
 
     def cadastrar(self, nome, series, repeticoes, id_treino):
-        exercicio = Exercicio(
-            None,
+        exercicio = ExercicioCreate(
             nome,
             series,
             repeticoes,
@@ -40,4 +39,5 @@ class ExercicioService:
 
     def deletar(self, id_exercicio):
         exercicio = self.repository.deletar(id_exercicio)
+        
         return exercicio
