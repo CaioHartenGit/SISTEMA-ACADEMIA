@@ -2,10 +2,15 @@ from fastapi import APIRouter, status,HTTPException
 from apps.schemas.exercicios_schemas import ExercicioCreate, ExercicioResponse, AtualizarExercicio
 from apps.repositories.exercicio_repository import ExercicioRepository
 from apps.services.exercicio_service import ExercicioService
-
+from apps.repositories.treino_repository import TreinoRepository
 
 exercicios_repository = ExercicioRepository()
-exercicio_service = ExercicioService(exercicios_repository)
+treino_repository = TreinoRepository()
+
+exercicio_service = ExercicioService(
+    exercicios_repository,
+    treino_repository
+)
 
 router = APIRouter(prefix = "/exercicios", tags = ["Exercicios"])
 

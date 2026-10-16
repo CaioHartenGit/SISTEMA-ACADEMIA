@@ -11,8 +11,8 @@ aluno_service = AlunoService(aluno_repository)
 router = APIRouter(prefix = "/alunos", tags = ["Alunos"])
 
 # Criar aluno 
-@router.post("/",status_code = status.HTTP_201_CREATED, response_model = AlunoCreate)
-def cadastrar_alunos(alunoCreate: AlunoCreate):
+@router.post("/{id_aluno}",status_code = status.HTTP_201_CREATED, response_model = AlunoCreate)
+def cadastrar_alunos(id_aluno: int, alunoCreate: AlunoCreate):
     try:
         cadastro_aluno = aluno_service.cadastrar(
             alunoCreate.nome,
@@ -25,6 +25,7 @@ def cadastrar_alunos(alunoCreate: AlunoCreate):
             status_code = status.HTTP_400_BAD_REQUEST,
             detail = str(erro)
         )
+    
 
 # Listar Alunos no Banco - PostgtesSQL
 @router.get("/", response_model = list [AlunoResponse])

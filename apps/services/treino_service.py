@@ -1,23 +1,27 @@
 from apps.entities.treino import TreinoCreate
 from apps.repositories.treino_repository import TreinoRepository
 from apps.repositories.exercicio_repository import ExercicioRepository
+from apps.repositories.aluno_repository import AlunoRepository
 
 
 class TreinoService:
-    def __init__(self, repository, exercicio_repository):
+    def __init__(self, repository, exercicio_repository, aluno_repository):
         self.repository = repository
         self.exercicio_repository = exercicio_repository
+        self.aluno_repository = aluno_repository
 
     def cadastrar(self, nome, dia_semana, id_aluno):
         treino = TreinoCreate(nome, dia_semana, id_aluno)
 
-        user = self.repository.inserir_Cadastrar(
+        aluno = self.aluno_repository.buscar_por_id(treino.id_aluno)
+        if aluno is None:
+            raise ValueError("ID do aluno não existe")
+       
+        return self.repository.inserir_Cadastrar(
             treino.nome,
             treino.dia_semana,
             treino.id_aluno
         )
-
-        return user
 
     def listar(self):
         treinos = self.repository.listar()

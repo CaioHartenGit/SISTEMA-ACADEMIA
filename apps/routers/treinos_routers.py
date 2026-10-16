@@ -3,15 +3,18 @@ from apps.schemas.treino_schemas import TreinoCreate, TreinoAtualizar, TreinoRes
 from apps.repositories.treino_repository import TreinoRepository
 from apps.services.treino_service import TreinoService
 from apps.repositories.exercicio_repository import ExercicioRepository
+from apps.repositories.aluno_repository import AlunoRepository
 
 
 
 treino_repository = TreinoRepository()
 exercicio_repository = ExercicioRepository()
+aluno_repository = AlunoRepository()
 
 treino_service = TreinoService(
     treino_repository,
-    exercicio_repository
+    exercicio_repository,
+    aluno_repository
 )
 
 router = APIRouter(prefix = "/treinos", tags = ["Treinos"])
