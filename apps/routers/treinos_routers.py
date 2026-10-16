@@ -2,10 +2,17 @@ from fastapi import APIRouter, status,HTTPException
 from apps.schemas.treino_schemas import TreinoCreate, TreinoAtualizar, TreinoResponse
 from apps.repositories.treino_repository import TreinoRepository
 from apps.services.treino_service import TreinoService
+from apps.repositories.exercicio_repository import ExercicioRepository
+
 
 
 treino_repository = TreinoRepository()
-treino_service = TreinoService(treino_repository)
+exercicio_repository = ExercicioRepository()
+
+treino_service = TreinoService(
+    treino_repository,
+    exercicio_repository
+)
 
 router = APIRouter(prefix = "/treinos", tags = ["Treinos"])
 
@@ -66,25 +73,29 @@ def atualizar_treino(id_aluno: int, TreinoNovo: TreinoAtualizar):
                   detail = str(erro)
              )
 
+
 # Deletar treino
-@router.delete("/{id_treino}", status_code = 200, response_model = bool)
+@router.delete("/{id_treino}", status_code=200, response_model=bool)
 def deletar(id_treino: int):
     try:
         delete = treino_service.deletar(id_treino)
         if delete is False:
             raise HTTPException(
-                status_code = status.HTTP_404_NOT_FOUND,
-                detail = "ID treino não encontrado!"
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="ID treino não encontrado!"
             )
         return delete
-    
     except HTTPException:
         raise
-    
+    except ValueError as erro:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=str(erro)
+        )
     except Exception:
-         raise HTTPException(
-              status_code = status.HTTP_500_INTERNAL_SERVER_ERROR,
-              detail = "ERRO interno ao deletar o treino"
-              )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="ERRO interno ao deletar o treino"
+        )
 
     

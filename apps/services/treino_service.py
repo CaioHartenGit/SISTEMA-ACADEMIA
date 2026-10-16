@@ -1,11 +1,12 @@
-from apps.entities.treino import Treino, TreinoCreate, TreinoAtualizar
+from apps.entities.treino import TreinoCreate
 from apps.repositories.treino_repository import TreinoRepository
+from apps.repositories.exercicio_repository import ExercicioRepository
 
 
 class TreinoService:
-
-    def __init__(self, repository):
+    def __init__(self, repository, exercicio_repository):
         self.repository = repository
+        self.exercicio_repository = exercicio_repository
 
     def cadastrar(self, nome, dia_semana, id_aluno):
         treino = TreinoCreate(nome, dia_semana, id_aluno)
@@ -33,13 +34,20 @@ class TreinoService:
                 dia_semana,
                 novo_dia_semana
             )
-            
         except ValueError:
             if treinos is None:
                 return None
-            
+
         return treinos
 
     def deletar(self, id_treino):
+        exercicios = self.exercicio_repository.listar_por_id(id_treino)
+
+        if exercicios:
+            raise ValueError(
+                "Não é possível excluir o treino, "
+                "pois existem exercícios cadastrados nele."
+            )
+
         return self.repository.delete_treino(id_treino)
-        
+
