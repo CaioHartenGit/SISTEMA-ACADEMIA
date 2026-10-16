@@ -75,7 +75,7 @@ def atualizar_treino(id_aluno: int, TreinoNovo: TreinoAtualizar):
 
 
 # Deletar treino
-@router.delete("/{id_treino}", status_code=200, response_model=bool)
+@router.delete("/{id_treino}", status_code=200)
 def deletar(id_treino: int):
     try:
         delete = treino_service.deletar(id_treino)
@@ -84,7 +84,7 @@ def deletar(id_treino: int):
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="ID treino não encontrado!"
             )
-        return delete
+        return {"Mensagem": "Treino Foi deletado"}
     except HTTPException:
         raise
     except ValueError as erro:
