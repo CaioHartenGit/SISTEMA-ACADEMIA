@@ -1,97 +1,286 @@
 
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #1e293b;
+    background: #f1f5f9;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f3f5f8;
-    color: #202938;
-    line-height: 1.6;
+    margin: 0;
+    min-height: 100vh;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 11px 16px;
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .cabecalho {
-    background-color: #172033;
+    background: #172554;
     color: #ffffff;
-    padding: 28px 8%;
+    padding: 28px 24px;
+}
+
+.cabecalho-conteudo {
+    width: min(1100px, 100%);
+    margin: 0 auto;
 }
 
 .cabecalho h1 {
+    margin: 0 0 8px;
     font-size: 28px;
-    margin-bottom: 5px;
 }
 
 .cabecalho p {
+    margin: 0;
     color: #cbd5e1;
 }
 
 .menu {
     display: flex;
+    justify-content: center;
     gap: 12px;
-    padding: 16px 8%;
-    background-color: #ffffff;
+    padding: 14px 20px;
+    background: #ffffff;
     border-bottom: 1px solid #e2e8f0;
 }
 
-button {
-    border: none;
-    border-radius: 6px;
-    padding: 11px 16px;
-    background-color: #2563eb;
-    color: #ffffff;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+.menu button {
+    background: transparent;
+    color: #475569;
 }
 
-button:hover {
-    background-color: #1d4ed8;
-}
-
-button:focus-visible {
-    outline: 3px solid #93c5fd;
-    outline-offset: 3px;
+.menu button:hover,
+.menu button.ativo {
+    background: #eff6ff;
+    color: #1d4ed8;
 }
 
 .conteudo {
-    width: 84%;
-    max-width: 1200px;
+    width: min(1100px, calc(100% - 32px));
     margin: 32px auto;
+    min-height: 55vh;
 }
 
 .secao {
-    padding: 28px;
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+    display: block;
 }
 
-.secao h2 {
-    margin-bottom: 8px;
-    font-size: 23px;
+.titulo-secao,
+.titulo-lista {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
-.secao > p {
-    margin-bottom: 20px;
+.titulo-secao {
+    margin-bottom: 24px;
+}
+
+.titulo-secao h2,
+.titulo-lista h3 {
+    margin: 0 0 8px;
+}
+
+.titulo-secao p,
+.titulo-lista p {
+    margin: 0;
     color: #64748b;
+    line-height: 1.5;
+}
+
+.cartao {
+    margin-bottom: 24px;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.cartao > h3 {
+    margin: 0 0 22px;
+}
+
+.formulario {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.campo label {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.campo input,
+.campo select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1e293b;
+}
+
+.campo input:focus,
+.campo select:focus {
+    outline: 3px solid #dbeafe;
+    border-color: #2563eb;
+}
+
+.campo input:disabled {
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+.campo small {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.acoes-formulario {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-self: end;
+}
+
+.botao-secundario {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.botao-secundario:hover {
+    background: #cbd5e1;
+}
+
+.mensagem {
+    color: #475569;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.formulario .mensagem {
+    margin: 0;
+    align-self: center;
+}
+
+#mensagem-cadastro,
+#mensagem-edicao {
+    grid-column: 1 / -1;
+}
+
+.cartao-lista {
+    padding: 0;
+    overflow: hidden;
+}
+
+.titulo-lista {
+    padding: 22px 24px;
 }
 
 #lista-alunos {
-    margin-top: 20px;
+    width: 100%;
     overflow-x: auto;
 }
 
-#mensagem-alunos {
-    margin-top: 12px;
+#lista-alunos table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+#lista-alunos th,
+#lista-alunos td {
+    padding: 15px 20px;
+    text-align: left;
+    border-top: 1px solid #e2e8f0;
+}
+
+#lista-alunos th {
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+#lista-alunos td {
+    font-size: 14px;
+}
+
+#lista-alunos tbody tr:hover {
+    background: #f8fafc;
+}
+
+#lista-alunos td button {
+    padding: 8px 13px;
+    font-size: 13px;
+}
+
+#lista-alunos:empty {
+    padding: 20px;
+}
+
+.cartao-edicao {
+    border-color: #bfdbfe;
+    background: #ffffff;
 }
 
 .rodape {
-    padding: 20px;
-    color: #64748b;
+    margin-top: 48px;
+    padding: 24px;
+    background: #172554;
+    color: #cbd5e1;
     text-align: center;
+}
+
+.rodape p {
+    margin: 0;
     font-size: 13px;
 }
 
@@ -99,114 +288,68 @@ button:focus-visible {
     display: none !important;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
     .cabecalho {
-        padding: 24px 5%;
+        padding: 24px 18px;
+    }
+
+    .cabecalho h1 {
+        font-size: 23px;
     }
 
     .menu {
-        padding: 14px 5%;
-        gap: 8px;
-        flex-wrap: wrap;
+        gap: 4px;
+        padding: 10px;
     }
 
     .menu button {
-        flex: 1;
+        padding: 10px;
+        font-size: 13px;
     }
 
     .conteudo {
-        width: 90%;
+        width: calc(100% - 24px);
         margin: 22px auto;
     }
 
-    .secao {
-        padding: 20px;
+    .titulo-secao {
+        align-items: flex-start;
+        flex-direction: column;
     }
-}
 
-/* ========================================= */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
+    .cartao {
+        padding: 18px;
+    }
 
-th,
-td {
-    padding: 14px 16px;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-th {
-    background-color: #f8fafc;
-    color: #475569;
-    font-size: 13px;
-    text-transform: uppercase;
-}
-
-td {
-    font-size: 14px;
-}
-
-tbody tr:hover {
-    background-color: #f8fafc;
-}
-
-/* ======================================= */
-
-
-.formulario {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    margin-top: 24px;
-    padding: 22px;
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-}
-
-.campo {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.campo label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #334155;
-}
-
-.campo input,
-.campo select {
-    width: 100%;
-    padding: 11px 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    background-color: #ffffff;
-    color: #202938;
-    font: inherit;
-}
-
-.campo input:focus,
-.campo select:focus {
-    outline: 2px solid #93c5fd;
-    border-color: #2563eb;
-}
-
-.formulario button {
-    justify-self: start;
-}
-
-#mensagem-cadastro {
-    align-self: center;
-    font-size: 14px;
-}
-
-@media (max-width: 600px) {
     .formulario {
         grid-template-columns: 1fr;
-        padding: 16px;
+        gap: 16px;
+    }
+
+    #mensagem-cadastro,
+    #mensagem-edicao {
+        grid-column: auto;
+    }
+
+    .acoes-formulario {
+        align-items: stretch;
+    }
+
+    .acoes-formulario button {
+        flex: 1;
+    }
+
+    .cartao-lista {
+        padding: 0;
+    }
+
+    .titulo-lista {
+        padding: 18px;
+    }
+
+    #lista-alunos th,
+    #lista-alunos td {
+        padding: 12px;
+        white-space: nowrap;
     }
 }

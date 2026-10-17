@@ -15,6 +15,7 @@ async function listarAlunos() {
         }
 
         const tabela = document.createElement("table");
+
         tabela.innerHTML = `
             <thead>
                 <tr>
@@ -23,6 +24,7 @@ async function listarAlunos() {
                     <th>Idade</th>
                     <th>Plano</th>
                     <th>Status</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -47,6 +49,18 @@ async function listarAlunos() {
                 linha.appendChild(celula);
             });
 
+            const celulaAcoes = document.createElement("td");
+            const botaoEditar = document.createElement("button");
+
+            botaoEditar.type = "button";
+            botaoEditar.textContent = "Editar";
+
+            botaoEditar.addEventListener("click", () => {
+                abrirEdicaoAluno(aluno);
+            });
+
+            celulaAcoes.appendChild(botaoEditar);
+            linha.appendChild(celulaAcoes);
             corpoTabela.appendChild(linha);
         });
 
@@ -54,7 +68,8 @@ async function listarAlunos() {
 
     } catch (erro) {
         lista.textContent = "";
-        mensagem.textContent = `Não foi possível carregar os alunos: ${erro.message}`;
+        mensagem.textContent =
+            `Não foi possível carregar os alunos: ${erro.message}`;
     }
 }
 
@@ -65,6 +80,7 @@ document
 document.addEventListener("DOMContentLoaded", listarAlunos);
 
 
+// CADASTRAR ALUNO
 const formularioAluno = document.getElementById("form-aluno");
 
 formularioAluno.addEventListener("submit", async (evento) => {
@@ -95,9 +111,82 @@ formularioAluno.addEventListener("submit", async (evento) => {
         await listarAlunos();
 
     } catch (erro) {
-        mensagem.textContent = `Erro ao cadastrar aluno: ${erro.message}`;
+        mensagem.textContent =
+            `Erro ao cadastrar aluno: ${erro.message}`;
     } finally {
         botao.disabled = false;
         botao.textContent = "Cadastrar aluno";
     }
 });
+
+
+// ABRIR EDIÇÃO
+function abrirEdicaoAluno(aluno) {
+    document.getElementById("editar-id-aluno").value = aluno.id_aluno;
+    document.getElementById("editar-nome-aluno").value = aluno.nome;
+    document.getElementById("editar-idade-aluno").value = aluno.idade;
+    document.getElementById("editar-plano-aluno").value = aluno.plano;
+
+    document.getElementById("mensagem-edicao").textContent = "";
+
+    const cartaoEdicao = document.getElementById("cartao-edicao");
+    cartaoEdicao.hidden = false;
+
+    cartaoEdicao.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+
+// SALVAR ALTERAÇÕES
+const formularioEdicao = document.getElementById("form-editar-aluno");
+
+formularioEdicao.addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+
+    const idAluno = document.getElementById("editar-id-aluno").value;
+    const mensagem = document.getElementById("mensagem-edicao");
+    const botao = document.getElementById("btn-salvar-edicao");
+    const cartaoEdicao = document.getElementById("cartao-edicao");
+
+    const dadosAtualizados = {
+        idade: Number(document.getElementById("editar-idade-aluno").value),
+        plano: document.getElementById("editar-plano-aluno").value
+    };
+
+    mensagem.textContent = "";
+    botao.disabled = true;
+    botao.textContent = "Salvando...";
+
+    try {
+        await requisicaoAPI(`/alunos/${idAluno}`, {
+            method: "PUT",
+            body: JSON.stringify(dadosAtualizados)
+        });
+
+        mensagem.textContent = "Aluno atualizado com sucesso!";
+
+        await listarAlunos();
+
+        formularioEdicao.reset();
+        cartaoEdicao.hidden = true;
+
+    } catch (erro) {
+        mensagem.textContent =
+            `Erro ao atualizar aluno: ${erro.message}`;
+    } finally {
+        botao.disabled = false;
+        botao.textContent = "Salvar alterações";
+    }
+});
+
+
+// CANCELAR EDIÇÃO
+document
+    .getElementById("btn-cancelar-edicao")
+    .addEventListener("click", () => {
+        formularioEdicao.reset();
+        document.getElementById("cartao-edicao").hidden = true;
+        document.getElementById("mensagem-edicao").textContent = "";
+    });

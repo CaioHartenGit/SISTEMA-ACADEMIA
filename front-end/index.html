@@ -5,92 +5,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Sistema-Academia</title>
-
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
     <header class="cabecalho">
-        <h1>Sistema-Academia</h1>
-        <p>Gerenciamento de alunos, treinos e exercícios</p>
-        </header>
-
-        <nav class="menu">
-            <button type="button" data-secao="alunos">Alunos</button>
-            <button type="button" data-secao="treinos">Treinos</button>
-            <button type="button" data-secao="exercicios">Exercícios</button>
-        </nav>
-
-        <main class="conteudo">
-
-            <section id="secao-alunos" class="secao">
-                <h2>Alunos</h2>
-                <p>Consulte e gerencie os alunos cadastrados na academia.</p>
-                    <form id="form-aluno" class="formulario">
-        <div class="campo">
-            <label for="nome-aluno">Nome completo</label>
-            <input
-                type="text"
-                id="nome-aluno"
-                name="nome"
-                maxlength="100"
-                placeholder="Digite o nome do aluno"
-                required
-            >
-        </div>
-
-        <div class="campo">
-            <label for="idade-aluno">Idade</label>
-            <input
-                type="number"
-                id="idade-aluno"
-                name="idade"
-                min="1"
-                step="1"
-                placeholder="Ex.: 20"
-                required
-            >
-        </div>
-
-        <div class="campo">
-            <label for="plano-aluno">Plano</label>
-            <select id="plano-aluno" name="plano" required>
-                <option value="">Selecione um plano</option>
-                <option value="básico">Básico</option>
-                <option value="intermediário">Intermediário</option>
-                <option value="pro">Pro</option>
-            </select>
-        </div>
-
-        <button type="submit" id="btn-cadastrar-aluno">
-            Cadastrar aluno
-        </button>
-
-        <p id="mensagem-cadastro" role="status" aria-live="polite"></p>
-    </form>
-
-            <button type="button" id="btn-listar-alunos">
-                Atualizar lista
-            </button>
-
-            <div id="mensagem-alunos" role="status"></div>
-
-            <div id="lista-alunos">
-                Os alunos serão exibidos aqui.
+        <div class="cabecalho-conteudo">
+            <div>
+                <h1>Sistema-Academia</h1>
+                <p>Gerenciamento de alunos, treinos e exercícios</p>
             </div>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <button type="button" data-secao="alunos">Alunos</button>
+        <button type="button" data-secao="treinos">Treinos</button>
+        <button type="button" data-secao="exercicios">Exercícios</button>
+    </nav>
+
+    <main class="conteudo">
+
+        <section id="secao-alunos" class="secao">
+
+            <div class="titulo-secao">
+                <div>
+                    <h2>Alunos</h2>
+                    <p>Cadastre e gerencie os alunos da academia.</p>
+                </div>
+
+                <button type="button" id="btn-listar-alunos" class="botao-secundario">
+                    Atualizar lista
+                </button>
+            </div>
+
+            <div class="cartao">
+                <h3>Cadastrar aluno</h3>
+
+                <form id="form-aluno" class="formulario">
+
+                    <div class="campo">
+                        <label for="nome-aluno">Nome completo</label>
+                        <input
+                            type="text"
+                            id="nome-aluno"
+                            name="nome"
+                            maxlength="100"
+                            placeholder="Digite o nome do aluno"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="idade-aluno">Idade</label>
+                        <input
+                            type="number"
+                            id="idade-aluno"
+                            name="idade"
+                            min="1"
+                            step="1"
+                            placeholder="Ex.: 20"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="plano-aluno">Plano</label>
+                        <select id="plano-aluno" name="plano" required>
+                            <option value="">Selecione um plano</option>
+                            <option value="básico">Básico</option>
+                            <option value="intermediário">Intermediário</option>
+                            <option value="pro">Pro</option>
+                        </select>
+                    </div>
+
+                    <div class="acoes-formulario">
+                        <button type="submit" id="btn-cadastrar-aluno">
+                            Cadastrar aluno
+                        </button>
+                    </div>
+
+                    <p id="mensagem-cadastro" class="mensagem" role="status" aria-live="polite"></p>
+
+                </form>
+            </div>
+
+            <div id="mensagem-alunos" class="mensagem" role="status" aria-live="polite"></div>
+
+            <div class="cartao cartao-lista">
+                <div class="titulo-lista">
+                    <div>
+                        <h3>Alunos cadastrados</h3>
+                        <p>Consulte os dados e selecione um aluno para editar.</p>
+                    </div>
+                </div>
+
+                <div id="lista-alunos">
+                    Os alunos serão exibidos aqui.
+                </div>
+            </div>
+
+            <div id="cartao-edicao" class="cartao cartao-edicao" hidden>
+                <div class="titulo-lista">
+                    <div>
+                        <h3>Editar aluno</h3>
+                        <p>Atualize a idade ou o plano do aluno selecionado.</p>
+                    </div>
+                </div>
+
+                <form id="form-editar-aluno" class="formulario">
+
+                    <input type="hidden" id="editar-id-aluno">
+
+                    <div class="campo">
+                        <label for="editar-nome-aluno">Nome</label>
+                        <input type="text" id="editar-nome-aluno" disabled>
+                        <small>O nome não pode ser alterado por esta operação.</small>
+                    </div>
+
+                    <div class="campo">
+                        <label for="editar-idade-aluno">Idade</label>
+                        <input
+                            type="number"
+                            id="editar-idade-aluno"
+                            min="1"
+                            step="1"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="editar-plano-aluno">Plano</label>
+                        <select id="editar-plano-aluno" required>
+                            <option value="básico">Básico</option>
+                            <option value="intermediário">Intermediário</option>
+                            <option value="pro">Pro</option>
+                        </select>
+                    </div>
+
+                    <div class="acoes-formulario">
+                        <button type="submit" id="btn-salvar-edicao">
+                            Salvar alterações
+                        </button>
+
+                        <button type="button" id="btn-cancelar-edicao" class="botao-secundario">
+                            Cancelar
+                        </button>
+                    </div>
+
+                    <p id="mensagem-edicao" class="mensagem" role="status" aria-live="polite"></p>
+
+                </form>
+            </div>
+
         </section>
 
         <section id="secao-treinos" class="secao" hidden>
-            <h2>Treinos</h2>
-            <p>Em breve, você poderá consultar e gerenciar os treinos.</p>
+            <div class="titulo-secao">
+                <div>
+                    <h2>Treinos</h2>
+                    <p>Gerenciamento de treinos dos alunos.</p>
+                </div>
+            </div>
+
+            <div class="cartao">
+                <p>Em breve, você poderá consultar e gerenciar os treinos.</p>
+            </div>
         </section>
 
         <section id="secao-exercicios" class="secao" hidden>
-            <h2>Exercícios</h2>
-            <p>Em breve, você poderá consultar e gerenciar os exercícios.</p>
+            <div class="titulo-secao">
+                <div>
+                    <h2>Exercícios</h2>
+                    <p>Gerenciamento dos exercícios dos treinos.</p>
+                </div>
+            </div>
+
+            <div class="cartao">
+                <p>Em breve, você poderá consultar e gerenciar os exercícios.</p>
+            </div>
         </section>
 
     </main>
@@ -103,6 +198,6 @@
     <script src="js/aluno.js" defer></script>
     <script src="js/treino.js" defer></script>
     <script src="js/exercicio.js" defer></script>
-</body>
 
+</body>
 </html>
