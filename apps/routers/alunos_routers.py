@@ -2,17 +2,19 @@ from fastapi import APIRouter, status,HTTPException
 from apps.schemas.alunos_schemas import AlunoCreate, AlunoResponse, AlunoAtualizar
 from apps.repositories.aluno_repository import AlunoRepository
 from apps.services.aluno_service import AlunoService
+from apps.repositories.treino_repository import TreinoRepository
 from typing import Literal
 
 
 aluno_repository = AlunoRepository()
-aluno_service = AlunoService(aluno_repository)
+treino_repository = TreinoRepository()
+aluno_service = AlunoService(aluno_repository,treino_repository)
 
 router = APIRouter(prefix = "/alunos", tags = ["Alunos"])
 
 # Criar aluno 
 @router.post("/{id_aluno}",status_code = status.HTTP_201_CREATED, response_model = AlunoCreate)
-def cadastrar_alunos(id_aluno: int, alunoCreate: AlunoCreate):
+def cadastrar_alunos(alunoCreate: AlunoCreate):
     try:
         cadastro_aluno = aluno_service.cadastrar(
             alunoCreate.nome,
@@ -76,16 +78,24 @@ def atualizar_aluno(id_aluno: int, NovoAluno: AlunoAtualizar):
     return atualiza_aluno
 
 # Deletar Aluno
-@router.delete("/{id_aluno}", response_model = AlunoResponse,status_code = 200)
+@router.delete("/{id_aluno}", status_code = 200)
 def deletar_aluno(id_aluno: int):
-    deleta_aluno = aluno_service.deletar(id_aluno)
-    if deleta_aluno is None:
+    try:
+        deleta_aluno = aluno_service.deletar(id_aluno)
+        if deleta_aluno is False:
+            raise HTTPException(
+                status_code = status.HTTP_404_NOT_FOUND,
+                detail = "Aluno não encontrado"
+            )
+        return {"Mensagem": "Aluno deletado"}
+    except HTTPException:
+        raise
+    except ValueError as erro:
         raise HTTPException(
-            status_code = status.HTTP_404_NOT_FOUND,
-            detail = "Aluno não encontrado"
+            status_code = status.HTTP_409_CONFLICT,
+            detail = str(erro)
         )
-    return deleta_aluno
-    
+        
 #  Ativar Aluno
 @router.patch("/{id_aluno}/ativar", response_model = AlunoResponse, status_code = 200 )
 def ativar_aluno(id_aluno: int):

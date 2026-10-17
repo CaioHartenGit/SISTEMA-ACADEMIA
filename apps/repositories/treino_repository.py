@@ -60,7 +60,7 @@ class TreinoRepository:
             return treinos
         except Exception:
             conn.rollback()
-            raise
+            raise # Lista Vazia 
         finally:
             cursor.close()
             conn.close()

@@ -1,10 +1,13 @@
 from apps.entities.aluno import Aluno, AlunoCreate, AlunoAtualizar
 from apps.repositories.aluno_repository import AlunoRepository
+from apps.repositories.treino_repository import TreinoRepository
+
 
 class AlunoService:
 
-    def __init__(self, repository):
+    def __init__(self, repository,treinoRepository):
         self.repository = repository
+        self.treino_repository = treinoRepository
 
     @staticmethod
     def _converter_aluno( dados):
@@ -74,12 +77,23 @@ class AlunoService:
         return self._converter_aluno(dados)
     
     def deletar(self, id_aluno):
-        dados = self.repository.deletar(id_aluno)
+        verifica = self.treino_repository.buscar_por_id(id_aluno)
+        if verifica:
+            raise ValueError(
 
+                "Não é possivel excluir o aluno!"
+                "Ele possui um treino cadastrado"
+                
+                )
+        
+        dados = self.repository.deletar(id_aluno)
         if dados is None:
-            return None
+            raise ValueError ("ID do aluno não existe")
 
         return self._converter_aluno(dados)
+      
+        
+      
 
     def ativar(self, id_aluno):
         Verificacao = self.buscar_por_id(id_aluno)

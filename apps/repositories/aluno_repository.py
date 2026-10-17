@@ -122,12 +122,9 @@ class AlunoRepository:
             conn.close()
 
     def deletar(self, id_aluno):
-
         conn = Conectar.conectar()
         cursor = conn.cursor(row_factory=dict_row)
-
         try:
-
             cursor.execute(
                 """
                 DELETE FROM aluno
@@ -136,24 +133,16 @@ class AlunoRepository:
                 """,
                 (id_aluno,)
             )
-
             aluno = cursor.fetchone()
-
             if aluno is None:
                 conn.rollback()
                 return None
-
             conn.commit()
-
             return aluno
-
         except Exception:
-
             conn.rollback()
             raise
-
         finally:
-
             cursor.close()
             conn.close()
 

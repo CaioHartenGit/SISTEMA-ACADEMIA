@@ -95,10 +95,5 @@ def deletar(id_treino: int):
             status_code=status.HTTP_409_CONFLICT,
             detail=str(erro)
         )
-    except Exception:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="ERRO interno ao deletar o treino"
-        )
-
+ 
     
