@@ -1,203 +1,853 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema-Academia</title>
+
+    <meta
+        name="description"
+        content="Sistema de gerenciamento de alunos, treinos e exercícios da academia."
+    >
+
+    <title>Forma | Gestão de Academia</title>
+
     <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
-    <header class="cabecalho">
-        <div class="cabecalho-conteudo">
-            <div>
-                <h1>Sistema-Academia</h1>
-                <p>Gerenciamento de alunos, treinos e exercícios</p>
-            </div>
-        </div>
-    </header>
-
-    <nav class="menu">
-        <button type="button" data-secao="alunos">Alunos</button>
-        <button type="button" data-secao="treinos">Treinos</button>
-        <button type="button" data-secao="exercicios">Exercícios</button>
-    </nav>
-
-    <main class="conteudo">
-
-        <section id="secao-alunos" class="secao">
-
-            <div class="titulo-secao">
-                <div>
-                    <h2>Alunos</h2>
-                    <p>Cadastre e gerencie os alunos da academia.</p>
-                </div>
-
-                <button type="button" id="btn-listar-alunos" class="botao-secundario">
-                    Atualizar lista
-                </button>
-            </div>
-
-            <div class="cartao">
-                <h3>Cadastrar aluno</h3>
-
-                <form id="form-aluno" class="formulario">
-
-                    <div class="campo">
-                        <label for="nome-aluno">Nome completo</label>
-                        <input
-                            type="text"
-                            id="nome-aluno"
-                            name="nome"
-                            maxlength="100"
-                            placeholder="Digite o nome do aluno"
-                            required
-                        >
-                    </div>
-
-                    <div class="campo">
-                        <label for="idade-aluno">Idade</label>
-                        <input
-                            type="number"
-                            id="idade-aluno"
-                            name="idade"
-                            min="1"
-                            step="1"
-                            placeholder="Ex.: 20"
-                            required
-                        >
-                    </div>
-
-                    <div class="campo">
-                        <label for="plano-aluno">Plano</label>
-                        <select id="plano-aluno" name="plano" required>
-                            <option value="">Selecione um plano</option>
-                            <option value="básico">Básico</option>
-                            <option value="intermediário">Intermediário</option>
-                            <option value="pro">Pro</option>
-                        </select>
-                    </div>
-
-                    <div class="acoes-formulario">
-                        <button type="submit" id="btn-cadastrar-aluno">
-                            Cadastrar aluno
-                        </button>
-                    </div>
-
-                    <p id="mensagem-cadastro" class="mensagem" role="status" aria-live="polite"></p>
-
-                </form>
-            </div>
-
-            <div id="mensagem-alunos" class="mensagem" role="status" aria-live="polite"></div>
-
-            <div class="cartao cartao-lista">
-                <div class="titulo-lista">
-                    <div>
-                        <h3>Alunos cadastrados</h3>
-                        <p>Consulte os dados e selecione um aluno para editar.</p>
-                    </div>
-                </div>
-
-                <div id="lista-alunos">
-                    Os alunos serão exibidos aqui.
-                </div>
-            </div>
-
-            <div id="cartao-edicao" class="cartao cartao-edicao" hidden>
-                <div class="titulo-lista">
-                    <div>
-                        <h3>Editar aluno</h3>
-                        <p>Atualize a idade ou o plano do aluno selecionado.</p>
-                    </div>
-                </div>
-
-                <form id="form-editar-aluno" class="formulario">
-
-                    <input type="hidden" id="editar-id-aluno">
-
-                    <div class="campo">
-                        <label for="editar-nome-aluno">Nome</label>
-                        <input type="text" id="editar-nome-aluno" disabled>
-                        <small>O nome não pode ser alterado por esta operação.</small>
-                    </div>
-
-                    <div class="campo">
-                        <label for="editar-idade-aluno">Idade</label>
-                        <input
-                            type="number"
-                            id="editar-idade-aluno"
-                            min="1"
-                            step="1"
-                            required
-                        >
-                    </div>
-
-                    <div class="campo">
-                        <label for="editar-plano-aluno">Plano</label>
-                        <select id="editar-plano-aluno" required>
-                            <option value="básico">Básico</option>
-                            <option value="intermediário">Intermediário</option>
-                            <option value="pro">Pro</option>
-                        </select>
-                    </div>
-
-                    <div class="acoes-formulario">
-                        <button type="submit" id="btn-salvar-edicao">
-                            Salvar alterações
-                        </button>
-
-                        <button type="button" id="btn-cancelar-edicao" class="botao-secundario">
-                            Cancelar
-                        </button>
-                    </div>
-
-                    <p id="mensagem-edicao" class="mensagem" role="status" aria-live="polite"></p>
-
-                </form>
-            </div>
-
-        </section>
-
-        <section id="secao-treinos" class="secao" hidden>
-            <div class="titulo-secao">
-                <div>
-                    <h2>Treinos</h2>
-                    <p>Gerenciamento de treinos dos alunos.</p>
-                </div>
-            </div>
-
-            <div class="cartao">
-                <p>Em breve, você poderá consultar e gerenciar os treinos.</p>
-            </div>
-        </section>
-
-        <section id="secao-exercicios" class="secao" hidden>
-            <div class="titulo-secao">
-                <div>
-                    <h2>Exercícios</h2>
-                    <p>Gerenciamento dos exercícios dos treinos.</p>
-                </div>
-            </div>
-
-            <div class="cartao">
-                <p>Em breve, você poderá consultar e gerenciar os exercícios.</p>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="rodape">
-        <p>Sistema-Academia — Projeto de gerenciamento de academia</p>
-    </footer>
 
     <script src="js/api.js" defer></script>
     <script src="js/aluno.js" defer></script>
     <script src="js/treino.js" defer></script>
     <script src="js/exercicio.js" defer></script>
+</head>
+
+<body>
+
+    <!-- CABEÇALHO PRINCIPAL -->
+    <header class="topo-principal">
+
+        <a class="identidade" href="#" aria-label="Forma - Página inicial">
+
+            <span class="identidade-simbolo">F</span>
+
+            <span class="identidade-textos">
+                <strong>FORMA</strong>
+                <small>GESTÃO DE ACADEMIA</small>
+            </span>
+
+        </a>
+
+        <div class="topo-informacoes">
+
+            <span class="indicador-conexao">
+                <span class="ponto-conexao"></span>
+                Servidor local
+            </span>
+
+            <span class="separador-topo"></span>
+
+            <span class="tipo-painel">
+                PAINEL ADMINISTRATIVO
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- NAVEGAÇÃO PRINCIPAL -->
+    <nav
+        class="navegacao-principal"
+        aria-label="Navegação principal"
+    >
+
+        <span class="navegacao-legenda">
+            ÁREAS DO SISTEMA
+        </span>
+
+        <div class="navegacao-opcoes">
+
+            <button
+                type="button"
+                class="navegacao-item ativo"
+                data-secao="alunos"
+                aria-current="page"
+            >
+                <span class="numero-navegacao">01</span>
+                Alunos
+            </button>
+
+            <button
+                type="button"
+                class="navegacao-item"
+                data-secao="treinos"
+            >
+                <span class="numero-navegacao">02</span>
+                Treinos
+            </button>
+
+            <button
+                type="button"
+                class="navegacao-item"
+                data-secao="exercicios"
+            >
+                <span class="numero-navegacao">03</span>
+                Exercícios
+            </button>
+
+        </div>
+
+        <span class="navegacao-status">
+            ÁREA DE GESTÃO
+        </span>
+
+    </nav>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo-principal">
+
+
+        <!-- APRESENTAÇÃO DA PÁGINA -->
+        <section class="introducao-pagina">
+
+            <div class="introducao-texto">
+
+                <div class="caminho-pagina">
+                    ESPAÇO DE TRABALHO
+                    <span>/</span>
+                    <strong id="titulo-pagina">ALUNOS</strong>
+                </div>
+
+                <h1>Central de alunos.</h1>
+
+                <p>
+                    Gerencie os cadastros e acompanhe a situação
+                    dos alunos em um só lugar.
+                </p>
+
+            </div>
+
+            <div class="marca-pagina" aria-hidden="true">
+                <span>F</span>
+                <small>FITNESS MANAGEMENT</small>
+            </div>
+
+        </section>
+
+
+        <!-- MÓDULO DE ALUNOS -->
+        <section id="secao-alunos" class="secao">
+
+
+            <!-- RESUMO DOS CADASTROS -->
+            <section
+                class="painel-resumo"
+                aria-label="Resumo dos alunos"
+            >
+
+                <div class="resumo-introducao">
+
+                    <span class="etiqueta-secao">
+                        VISÃO GERAL
+                    </span>
+
+                    <h2>Seu espaço, seus alunos.</h2>
+
+                    <p>
+                        Indicadores do cadastro da academia.
+                    </p>
+
+                </div>
+
+
+                <article class="indicador indicador-total">
+
+                    <span class="indicador-legenda">
+                        TOTAL CADASTRADO
+                    </span>
+
+                    <strong id="total-alunos">0</strong>
+
+                    <span class="indicador-descricao">
+                        Alunos registrados
+                    </span>
+
+                </article>
+
+
+                <article class="indicador indicador-ativos">
+
+                    <span class="indicador-legenda">
+                        CADASTROS ATIVOS
+                    </span>
+
+                    <strong id="alunos-ativos">0</strong>
+
+                    <span class="indicador-descricao">
+                        Alunos ativos
+                    </span>
+
+                </article>
+
+
+                <article class="indicador indicador-inativos">
+
+                    <span class="indicador-legenda">
+                        CADASTROS INATIVOS
+                    </span>
+
+                    <strong id="alunos-inativos">0</strong>
+
+                    <span class="indicador-descricao">
+                        Alunos inativos
+                    </span>
+
+                </article>
+
+            </section>
+
+
+            <!-- NOVA ORGANIZAÇÃO:
+                 CADASTRO E CONSULTA NA PARTE SUPERIOR,
+                 LISTAGEM COMPLETA ABAIXO. -->
+            <div class="layout-alunos">
+
+
+                <!-- ÁREA DE FERRAMENTAS -->
+                <div class="coluna-ferramentas">
+
+
+                    <!-- CADASTRO DE ALUNO -->
+                    <section class="painel painel-cadastro">
+
+                        <header class="cabecalho-painel">
+
+                            <div>
+
+                                <span class="etiqueta-secao">
+                                    01 / CADASTRO
+                                </span>
+
+                                <h2>Novo aluno</h2>
+
+                                <p>
+                                    Adicione uma pessoa à base da academia.
+                                </p>
+
+                            </div>
+
+                        </header>
+
+
+                        <form
+                            id="form-aluno"
+                            class="formulario"
+                        >
+
+                            <div class="campo">
+
+                                <label for="nome-aluno">
+                                    Nome completo
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nome-aluno"
+                                    name="nome"
+                                    placeholder="Ex.: João da Silva"
+                                    autocomplete="name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="campo">
+
+                                <label for="idade-aluno">
+                                    Idade
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="idade-aluno"
+                                    name="idade"
+                                    placeholder="Idade em anos"
+                                    min="1"
+                                    max="120"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="campo">
+
+                                <label for="plano-aluno">
+                                    Plano contratado
+                                </label>
+
+                                <select
+                                    id="plano-aluno"
+                                    name="plano"
+                                    required
+                                >
+                                    <option value="">
+                                        Escolha um plano
+                                    </option>
+
+                                    <option value="básico">
+                                        Básico
+                                    </option>
+
+                                    <option value="intermediário">
+                                        Intermediário
+                                    </option>
+
+                                    <option value="premium">
+                                        Premium
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="acoes-formulario">
+
+                                <button
+                                    type="submit"
+                                    id="btn-cadastrar-aluno"
+                                    class="botao botao-principal"
+                                >
+                                    Cadastrar aluno
+                                    <span aria-hidden="true">+</span>
+                                </button>
+
+                            </div>
+
+                        </form>
+
+
+                        <p
+                            id="mensagem-cadastro"
+                            class="mensagem"
+                            role="status"
+                            aria-live="polite"
+                        ></p>
+
+                    </section>
+
+
+                    <!-- CONSULTA DE ALUNOS -->
+                    <section class="painel painel-consulta">
+
+                        <header class="cabecalho-painel">
+
+                            <div>
+
+                                <span class="etiqueta-secao">
+                                    02 / CONSULTA
+                                </span>
+
+                                <h2>Localizar aluno</h2>
+
+                                <p>
+                                    Encontre registros usando os filtros abaixo.
+                                </p>
+
+                            </div>
+
+                        </header>
+
+
+                        <!-- ORGANIZAÇÃO INTERNA DAS BUSCAS -->
+                        <div class="consultas-grid">
+
+
+                            <!-- BUSCA POR ID -->
+                            <form
+                                id="form-busca-id"
+                                class="formulario-busca"
+                            >
+
+                                <div class="campo">
+
+                                    <label for="busca-id">
+                                        Identificador (ID)
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        id="busca-id"
+                                        name="id"
+                                        placeholder="Digite o ID"
+                                        min="1"
+                                    >
+
+                                </div>
+
+                                <div class="acoes-formulario">
+
+                                    <button
+                                        type="submit"
+                                        class="botao botao-consulta"
+                                    >
+                                        Buscar por ID
+                                        <span aria-hidden="true">→</span>
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+
+                            <!-- BUSCA POR NOME -->
+                            <form
+                                id="form-busca-nome"
+                                class="formulario-busca"
+                            >
+
+                                <div class="campo">
+
+                                    <label for="busca-nome">
+                                        Nome do aluno
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="busca-nome"
+                                        name="nome"
+                                        placeholder="Digite o nome"
+                                    >
+
+                                </div>
+
+                                <div class="acoes-formulario">
+
+                                    <button
+                                        type="submit"
+                                        class="botao botao-consulta"
+                                    >
+                                        Buscar por nome
+                                        <span aria-hidden="true">→</span>
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+
+                            <!-- BUSCA POR PLANO -->
+                            <form
+                                id="form-busca-plano"
+                                class="formulario-busca"
+                            >
+
+                                <div class="campo">
+
+                                    <label for="busca-plano">
+                                        Plano contratado
+                                    </label>
+
+                                    <select
+                                        id="busca-plano"
+                                        name="plano"
+                                    >
+                                        <option value="">
+                                            Todos os planos
+                                        </option>
+
+                                        <option value="básico">
+                                            Básico
+                                        </option>
+
+                                        <option value="intermediário">
+                                            Intermediário
+                                        </option>
+
+                                        <option value="premium">
+                                            Premium
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="acoes-formulario">
+
+                                    <button
+                                        type="submit"
+                                        class="botao botao-consulta"
+                                    >
+                                        Buscar por plano
+                                        <span aria-hidden="true">→</span>
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+
+                        <!-- LIMPAR FILTROS -->
+                        <button
+                            type="button"
+                            id="btn-limpar-busca"
+                            class="botao botao-limpar"
+                        >
+                            Limpar filtros
+                        </button>
+
+
+                        <!-- MENSAGENS DE BUSCA -->
+                        <p
+                            id="mensagem-busca"
+                            class="mensagem"
+                            role="status"
+                            aria-live="polite"
+                        ></p>
+
+                    </section>
+
+                </div>
+
+
+                <!-- ÁREA DE REGISTROS -->
+                <div class="coluna-registros">
+
+
+                    <!-- DIRETÓRIO DE ALUNOS -->
+                    <section class="painel painel-listagem">
+
+
+                        <!-- CABEÇALHO DA LISTAGEM -->
+                        <header class="cabecalho-listagem">
+
+                            <div>
+
+                                <span class="etiqueta-secao">
+                                    03 / BASE DE DADOS
+                                </span>
+
+                                <h2>Diretório de alunos</h2>
+
+                                <p>
+                                    Consulte os registros e gerencie cada cadastro.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                id="btn-listar-alunos"
+                                class="botao botao-atualizar"
+                            >
+                                <span aria-hidden="true">↻</span>
+                                Atualizar
+                            </button>
+
+                        </header>
+
+
+                        <!-- IDENTIFICAÇÃO DA TABELA -->
+                        <div class="barra-tabela">
+
+                            <span>
+                                REGISTROS DA ACADEMIA
+                            </span>
+
+                            <span class="barra-tabela-status">
+                                Consulta local
+                            </span>
+
+                        </div>
+
+
+                        <!-- TABELA GERADA PELO JAVASCRIPT -->
+                        <div
+                            id="lista-alunos"
+                            class="area-tabela"
+                            aria-live="polite"
+                        >
+                            <!-- O JavaScript insere os registros aqui. -->
+                        </div>
+
+
+                        <!-- RODAPÉ DA TABELA -->
+                        <footer class="rodape-tabela">
+
+                            <span
+                                class="icone-informacao"
+                                aria-hidden="true"
+                            >
+                                i
+                            </span>
+
+                            <p>
+                                Utilize as ações de cada registro para gerenciar
+                                os cadastros.
+                            </p>
+
+                        </footer>
+
+                    </section>
+
+
+                    <!-- MENSAGENS GERAIS DOS ALUNOS -->
+                    <div
+                        id="mensagem-alunos"
+                        class="mensagem mensagem-geral"
+                        role="status"
+                        aria-live="polite"
+                    ></div>
+
+
+                    <!-- EDIÇÃO DE ALUNO -->
+                    <section
+                        id="cartao-edicao"
+                        class="painel painel-edicao cartao-edicao"
+                        hidden
+                    >
+
+                        <header class="cabecalho-painel">
+
+                            <div>
+
+                                <span class="etiqueta-secao">
+                                    04 / EDIÇÃO
+                                </span>
+
+                                <h2>Editar cadastro</h2>
+
+                                <p>
+                                    Atualize os dados do aluno selecionado.
+                                </p>
+
+                            </div>
+
+                        </header>
+
+
+                        <form
+                            id="form-editar-aluno"
+                            class="formulario"
+                        >
+
+                            <input
+                                type="hidden"
+                                id="editar-id-aluno"
+                                name="id"
+                            >
+
+
+                            <div class="campo">
+
+                                <label for="editar-nome-aluno">
+                                    Nome completo
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="editar-nome-aluno"
+                                    name="nome"
+                                    autocomplete="name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="campo">
+
+                                <label for="editar-idade-aluno">
+                                    Idade
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="editar-idade-aluno"
+                                    name="idade"
+                                    min="1"
+                                    max="120"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="campo">
+
+                                <label for="editar-plano-aluno">
+                                    Plano contratado
+                                </label>
+
+                                <select
+                                    id="editar-plano-aluno"
+                                    name="plano"
+                                    required
+                                >
+                                    <option value="básico">
+                                        Básico
+                                    </option>
+
+                                    <option value="intermediário">
+                                        Intermediário
+                                    </option>
+
+                                    <option value="premium">
+                                        Premium
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- AÇÕES DA EDIÇÃO -->
+                            <div class="acoes-formulario acoes-edicao">
+
+                                <button
+                                    type="submit"
+                                    id="btn-salvar-edicao"
+                                    class="botao botao-principal"
+                                >
+                                    Salvar alterações
+                                </button>
+
+                                <button
+                                    type="button"
+                                    id="btn-cancelar-edicao"
+                                    class="botao botao-secundario"
+                                >
+                                    Cancelar
+                                </button>
+
+                            </div>
+
+                        </form>
+
+
+                        <p
+                            id="mensagem-edicao"
+                            class="mensagem"
+                            role="status"
+                            aria-live="polite"
+                        ></p>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MÓDULO DE TREINOS -->
+        <section
+            id="secao-treinos"
+            class="secao"
+            hidden
+        >
+
+            <header class="cabecalho-modulo">
+
+                <span class="etiqueta-secao">
+                    MÓDULO 02
+                </span>
+
+                <h2>Gestão de treinos</h2>
+
+                <p>
+                    Organize os treinos e acompanhe sua associação aos alunos.
+                </p>
+
+            </header>
+
+
+            <div class="painel painel-em-construcao">
+
+                <span
+                    class="icone-modulo"
+                    aria-hidden="true"
+                >
+                    02
+                </span>
+
+                <h3>Área de treinos</h3>
+
+                <p>
+                    Este espaço está reservado para as funcionalidades
+                    de gerenciamento de treinos.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- MÓDULO DE EXERCÍCIOS -->
+        <section
+            id="secao-exercicios"
+            class="secao"
+            hidden
+        >
+
+            <header class="cabecalho-modulo">
+
+                <span class="etiqueta-secao">
+                    MÓDULO 03
+                </span>
+
+                <h2>Gestão de exercícios</h2>
+
+                <p>
+                    Organize os exercícios que fazem parte dos treinos.
+                </p>
+
+            </header>
+
+
+            <div class="painel painel-em-construcao">
+
+                <span
+                    class="icone-modulo"
+                    aria-hidden="true"
+                >
+                    03
+                </span>
+
+                <h3>Área de exercícios</h3>
+
+                <p>
+                    Este espaço está reservado para as funcionalidades
+                    de gerenciamento de exercícios.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- RODAPÉ PRINCIPAL -->
+        <footer class="rodape-principal">
+
+            <p>
+                <strong>FORMA</strong>
+                <span>·</span>
+                Sistema de gestão de academia
+            </p>
+
+            <span>
+                PAINEL ADMINISTRATIVO
+            </span>
+
+        </footer>
+
+    </main>
 
 </body>
 </html>
