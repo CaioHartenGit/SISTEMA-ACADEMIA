@@ -44,7 +44,29 @@ class TreinoRepository:
             cursor.close()
             conn.close()
 
-        
+
+    def buscar_por_id_treino(self, id_treino):
+        conn = Conectar.conectar()
+        cursor = conn.cursor(row_factory=dict_row)
+
+        try:
+            cursor.execute("""
+                SELECT *
+                FROM treino
+                WHERE id = %s
+            """, (id_treino,))
+
+            treino = cursor.fetchone()
+            return treino
+
+        except Exception:
+            conn.rollback()
+            raise
+
+        finally:
+            cursor.close()
+            conn.close()
+            
     def buscar_por_id(self,id_aluno):
         conn  = Conectar.conectar()
         cursor = conn.cursor(row_factory=dict_row)

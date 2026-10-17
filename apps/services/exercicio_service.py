@@ -11,7 +11,7 @@ class ExercicioService:
     def cadastrar(self, nome, series, repeticoes, id_treino):
         exercicio = ExercicioCreate(nome,series,repeticoes,id_treino )
 
-        treino = self.treino_repository.buscar_por_id(exercicio.id_treino)
+        treino = self.treino_repository.buscar_por_id_treino(exercicio.id_treino)
         if not treino:
             raise ValueError("ID do treino não existe")
 
