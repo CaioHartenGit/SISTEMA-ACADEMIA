@@ -1,0 +1,361 @@
+
+#secao-exercicios {
+    color: #25324a;
+}
+
+#secao-exercicios .cabecalho-modulo {
+    margin-bottom: 26px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e5eaf3;
+}
+
+#secao-exercicios .cabecalho-modulo h2 {
+    margin: 8px 0;
+    color: #14213d;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -.7px;
+}
+
+#secao-exercicios .cabecalho-modulo p {
+    color: #7a89a5;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+#secao-exercicios .painel {
+    margin-bottom: 20px;
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #e3e9f3;
+    border-radius: 14px;
+    box-shadow: 0 5px 16px rgba(27,44,79,.045);
+}
+
+#secao-exercicios .cabecalho-painel,
+#secao-exercicios .cabecalho-listagem {
+    margin-bottom: 20px;
+}
+
+#secao-exercicios .cabecalho-painel h2,
+#secao-exercicios .cabecalho-listagem h2 {
+    margin: 0 0 7px;
+    color: #14213d;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+#secao-exercicios .cabecalho-painel p,
+#secao-exercicios .cabecalho-listagem p {
+    margin: 0;
+    color: #7a89a5;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+#secao-exercicios .etiqueta-secao {
+    display: inline-block;
+    margin-bottom: 7px;
+    color: #3563ff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+#secao-exercicios .formulario,
+#secao-exercicios .formulario-busca {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#secao-exercicios .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+#secao-exercicios .campo label {
+    color: #374663;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+#secao-exercicios .campo input,
+#secao-exercicios .campo select,
+#secao-exercicios .campo textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 43px;
+    padding: 10px 12px;
+    color: #263550;
+    background: #fff;
+    border: 1px solid #dce4f0;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 14px;
+    transition: border-color .16s, box-shadow .16s;
+}
+
+#secao-exercicios .campo textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+#secao-exercicios .campo input::placeholder,
+#secao-exercicios .campo textarea::placeholder {
+    color: #a1aec4;
+}
+
+#secao-exercicios .campo input:focus,
+#secao-exercicios .campo select:focus,
+#secao-exercicios .campo textarea:focus {
+    outline: none;
+    border-color: #3563ff;
+    box-shadow: 0 0 0 3px rgba(53,99,255,.11);
+}
+
+#secao-exercicios .botao {
+    box-sizing: border-box;
+    min-height: 41px;
+    padding: 10px 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .16s, border-color .16s, transform .16s;
+}
+
+#secao-exercicios .botao:active {
+    transform: translateY(1px);
+}
+
+#secao-exercicios .botao-principal {
+    color: #fff;
+    background: #3563f5;
+    border-color: #3563f5;
+    box-shadow: 0 3px 7px rgba(53,99,245,.17);
+}
+
+#secao-exercicios .botao-principal:hover {
+    background: #2853e5;
+    border-color: #2853e5;
+}
+
+#secao-exercicios .botao-secundario {
+    color: #3158c9;
+    background: #f0f4ff;
+    border-color: #dfe7ff;
+}
+
+#secao-exercicios .botao-secundario:hover {
+    background: #e4ebff;
+    border-color: #cbd8ff;
+}
+
+#secao-exercicios .botao-perigo {
+    color: #e63946;
+    background: #fff1f2;
+    border-color: #ffd7dc;
+}
+
+#secao-exercicios .botao-perigo:hover {
+    color: #c92335;
+    background: #ffe5e8;
+    border-color: #ffc2ca;
+}
+
+#secao-exercicios .botao-limpar {
+    color: #71809b;
+    background: #fff;
+    border-color: #e1e7f0;
+}
+
+#secao-exercicios .botao-limpar:hover {
+    color: #3158c9;
+    background: #f7f9ff;
+}
+
+#secao-exercicios .consultas-grid {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto auto;
+    align-items: end;
+    gap: 12px;
+}
+
+#secao-exercicios .consultas-grid .campo {
+    min-width: 0;
+}
+
+#secao-exercicios .consultas-grid button {
+    min-height: 43px;
+}
+
+#secao-exercicios .cabecalho-listagem {
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e5eaf3;
+}
+
+#secao-exercicios #lista-exercicios {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    align-items: stretch;
+    gap: 16px;
+    min-width: 0;
+}
+
+#secao-exercicios .registro-exercicio {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    min-width: 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e3e9f3;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(27,44,79,.035);
+    overflow-wrap: anywhere;
+    transition: transform .18s, box-shadow .18s, border-color .18s;
+}
+
+#secao-exercicios .registro-exercicio:hover {
+    transform: translateY(-2px);
+    border-color: #d4dfff;
+    box-shadow: 0 8px 18px rgba(27,44,79,.075);
+}
+
+#secao-exercicios .registro-exercicio .etiqueta-secao {
+    display: inline-flex;
+    margin: 0 0 12px;
+    padding: 6px 9px;
+    color: #3158d8;
+    background: #f0f4ff;
+    border: 1px solid #e0e8ff;
+    border-radius: 6px;
+    font-size: 11px;
+    letter-spacing: .8px;
+}
+
+#secao-exercicios .registro-exercicio h3 {
+    margin: 0 0 14px;
+    padding-bottom: 13px;
+    color: #172541;
+    border-bottom: 1px solid #edf0f7;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+#secao-exercicios .registro-exercicio p {
+    margin: 0 0 10px;
+    color: #687792;
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+#secao-exercicios .registro-exercicio p strong {
+    color: #34435f;
+    font-weight: 750;
+}
+
+#secao-exercicios .acoes-registro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #edf0f7;
+}
+
+#secao-exercicios .acoes-registro .botao {
+    min-height: 37px;
+    padding: 8px 13px;
+    font-size: 12px;
+}
+
+#secao-exercicios .estado-vazio {
+    grid-column: 1/-1;
+    margin: 0;
+    padding: 28px 20px;
+    color: #7a89a5;
+    background: #f8faff;
+    border: 1px dashed #dce4f0;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+#secao-exercicios .mensagem {
+    margin-top: 12px;
+    color: #7a89a5;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+#secao-exercicios .mensagem:empty {
+    display: none;
+}
+
+#secao-exercicios .mensagem-sucesso {
+    color: #16804a;
+}
+
+#secao-exercicios .mensagem-erro {
+    color: #d52b3b;
+}
+
+#secao-exercicios .mensagem-info {
+    color: #3158c9;
+}
+
+#secao-exercicios #cartao-edicao-exercicio {
+    margin-top: 20px;
+    border-top: 3px solid #3563f5;
+}
+
+#secao-exercicios [hidden] {
+    display: none !important;
+}
+
+#secao-exercicios button:focus-visible,
+#secao-exercicios input:focus-visible,
+#secao-exercicios select:focus-visible,
+#secao-exercicios textarea:focus-visible {
+    outline: 3px solid rgba(53,99,245,.22);
+    outline-offset: 2px;
+}
+
+@media (max-width:800px) {
+    #secao-exercicios #lista-exercicios {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width:600px) {
+    #secao-exercicios .cabecalho-modulo h2 {
+        font-size: 25px;
+    }
+    #secao-exercicios .painel {
+        padding: 18px;
+    }
+    #secao-exercicios .consultas-grid {
+        grid-template-columns: 1fr;
+    }
+    #secao-exercicios .consultas-grid button {
+        width: 100%;
+    }
+    #secao-exercicios #lista-exercicios {
+        gap: 12px;
+    }
+    #secao-exercicios .registro-exercicio {
+        padding: 16px;
+    }
+}
