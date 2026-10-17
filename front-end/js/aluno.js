@@ -445,3 +445,35 @@ async function alterarStatusAluno(aluno, ativar) {
 
 // CARREGAR ALUNOS QUANDO A PÁGINA INICIAR
 listarAlunos();
+
+
+/* NAVEGAÇÃO ENTRE AS SEÇÕES */
+const botoesNavegacao = document.querySelectorAll("[data-secao]");
+
+const secoes = {
+    alunos: document.getElementById("secao-alunos"),
+    treinos: document.getElementById("secao-treinos"),
+    exercicios: document.getElementById("secao-exercicios")
+};
+
+botoesNavegacao.forEach((botao) => {
+    botao.addEventListener("click", () => {
+        const nomeSecao = botao.dataset.secao;
+
+        Object.entries(secoes).forEach(([nome, secao]) => {
+            secao.hidden = nome !== nomeSecao;
+        });
+
+        botoesNavegacao.forEach((item) => {
+            const ativo = item.dataset.secao === nomeSecao;
+
+            item.classList.toggle("ativo", ativo);
+
+            if (ativo) {
+                item.setAttribute("aria-current", "page");
+            } else {
+                item.removeAttribute("aria-current");
+            }
+        });
+    });
+});

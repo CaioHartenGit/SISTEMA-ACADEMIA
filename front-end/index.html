@@ -13,6 +13,7 @@
     <title>Forma | Gestão de Academia</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/treinos.css">
 
     <script src="js/api.js" defer></script>
     <script src="js/aluno.js" defer></script>
@@ -363,7 +364,6 @@
 
                         <!-- ORGANIZAÇÃO INTERNA DAS BUSCAS -->
                         <div class="consultas-grid">
-
 
                             <!-- BUSCA POR ID -->
                             <form
@@ -746,47 +746,230 @@
         </section>
 
 
-        <!-- MÓDULO DE TREINOS -->
-        <section
-            id="secao-treinos"
-            class="secao"
-            hidden
-        >
+        
+<!-- =====================================================
+     SEÇÃO DE TREINOS
+     ===================================================== -->
+<section id="secao-treinos" hidden>
 
-            <header class="cabecalho-modulo">
+    <div class="cabecalho-secao">
+        <span class="etiqueta-secao">MÓDULO 02</span>
+        <h2>Treinos</h2>
+        <p>Cadastre, consulte, atualize e exclua os treinos da academia.</p>
+    </div>
 
-                <span class="etiqueta-secao">
-                    MÓDULO 02
-                </span>
+    <!-- CADASTRAR TREINO -->
+    <section class="painel painel-cadastro">
+        <header class="cabecalho-painel">
+            <div>
+                <span class="etiqueta-secao">01 / CADASTRO</span>
+                <h3>Novo treino</h3>
+                <p>Associe um treino a um aluno.</p>
+            </div>
+        </header>
 
-                <h2>Gestão de treinos</h2>
+        <form id="form-treino" class="formulario">
 
-                <p>
-                    Organize os treinos e acompanhe sua associação aos alunos.
-                </p>
-
-            </header>
-
-
-            <div class="painel painel-em-construcao">
-
-                <span
-                    class="icone-modulo"
-                    aria-hidden="true"
+            <div class="campo">
+                <label for="nome-treino">Nome do treino</label>
+                <input
+                    type="text"
+                    id="nome-treino"
+                    name="nome"
+                    placeholder="Ex.: Treino A"
+                    required
                 >
-                    02
-                </span>
-
-                <h3>Área de treinos</h3>
-
-                <p>
-                    Este espaço está reservado para as funcionalidades
-                    de gerenciamento de treinos.
-                </p>
-
             </div>
 
-        </section>
+            <div class="campo">
+                <label for="id-aluno-treino">ID do aluno</label>
+                <input
+                    type="number"
+                    id="id-aluno-treino"
+                    name="id_aluno"
+                    min="1"
+                    placeholder="Digite o ID do aluno"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label for="dia-semana-treino">Dia da semana</label>
+                <select
+                    id="dia-semana-treino"
+                    name="dia_semana"
+                    required
+                >
+                    <option value="">Selecione o dia</option>
+                    <option value="Segunda-feira">Segunda-feira</option>
+                    <option value="Terça-feira">Terça-feira</option>
+                    <option value="Quarta-feira">Quarta-feira</option>
+                    <option value="Quinta-feira">Quinta-feira</option>
+                    <option value="Sexta-feira">Sexta-feira</option>
+                    <option value="Sábado">Sábado</option>
+                    <option value="Domingo">Domingo</option>
+                </select>
+            </div>
+
+            <div class="acoes-formulario">
+                <button type="submit" class="botao botao-principal">
+                    Cadastrar treino
+                </button>
+            </div>
+
+            <p id="mensagem-treinos" class="mensagem" role="status"></p>
+        </form>
+    </section>
+
+    <!-- CONSULTAR TREINOS -->
+    <section class="painel painel-consulta">
+        <header class="cabecalho-painel">
+            <div>
+                <span class="etiqueta-secao">02 / CONSULTA</span>
+                <h3>Consultar treinos</h3>
+                <p>Liste todos os treinos ou consulte pelo ID do aluno.</p>
+            </div>
+        </header>
+
+        <!-- GET /treinos/{id_aluno} -->
+        <form id="form-busca-treino-aluno" class="formulario">
+
+            <div class="campo">
+                <label for="busca-id-aluno-treino">ID do aluno</label>
+                <input
+                    type="number"
+                    id="busca-id-aluno-treino"
+                    name="id_aluno"
+                    min="1"
+                    placeholder="Digite o ID do aluno"
+                    required
+                >
+            </div>
+
+            <div class="acoes-formulario">
+                <button type="submit" class="botao botao-consulta">
+                    Buscar por ID do aluno
+                </button>
+
+                <button
+                    type="button"
+                    id="btn-limpar-busca-treino"
+                    class="botao botao-secundario"
+                >
+                    Limpar busca
+                </button>
+            </div>
+        </form>
+
+        <!-- GET /treinos/ -->
+        <div class="acoes-formulario">
+            <button
+                type="button"
+                id="btn-listar-treinos"
+                class="botao botao-principal"
+            >
+                Listar todos os treinos
+            </button>
+        </div>
+
+        <div
+            id="lista-treinos"
+            class="lista-registros"
+            aria-live="polite"
+        >
+            <p class="estado-vazio">
+                Os treinos serão exibidos aqui.
+            </p>
+        </div>
+    </section>
+
+    <!-- ATUALIZAR TREINO -->
+    <section
+        id="cartao-edicao-treino"
+        class="painel painel-edicao"
+        hidden
+    >
+        <header class="cabecalho-painel">
+            <div>
+                <span class="etiqueta-secao">03 / EDIÇÃO</span>
+                <h3>Atualizar treino</h3>
+                <p>Atualize os dados do treino selecionado.</p>
+            </div>
+        </header>
+
+        <!-- PUT /treinos/{id_aluno} -->
+        <form id="form-editar-treino" class="formulario">
+
+            <input
+                type="hidden"
+                id="editar-id-treino"
+                name="id_treino"
+            >
+
+            <div class="campo">
+                <label for="editar-nome-treino">Nome do treino</label>
+                <input
+                    type="text"
+                    id="editar-nome-treino"
+                    name="nome"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label for="editar-id-aluno-treino">ID do aluno</label>
+                <input
+                    type="number"
+                    id="editar-id-aluno-treino"
+                    name="id_aluno"
+                    min="1"
+                    required
+                >
+            </div>
+
+            <div class="campo">
+                <label for="editar-dia-semana-treino">Novo dia da semana</label>
+                <select
+                    id="editar-dia-semana-treino"
+                    name="novo_dia_semana"
+                    required
+                >
+                    <option value="">Selecione o dia</option>
+                    <option value="Segunda-feira">Segunda-feira</option>
+                    <option value="Terça-feira">Terça-feira</option>
+                    <option value="Quarta-feira">Quarta-feira</option>
+                    <option value="Quinta-feira">Quinta-feira</option>
+                    <option value="Sexta-feira">Sexta-feira</option>
+                    <option value="Sábado">Sábado</option>
+                    <option value="Domingo">Domingo</option>
+                </select>
+            </div>
+
+            <div class="acoes-formulario">
+                <button
+                    type="submit"
+                    id="btn-salvar-edicao-treino"
+                    class="botao botao-principal"
+                >
+                    Salvar alterações
+                </button>
+
+                <button
+                    type="button"
+                    id="btn-cancelar-edicao-treino"
+                    class="botao botao-secundario"
+                >
+                    Cancelar
+                </button>
+            </div>
+
+            <p id="mensagem-edicao-treino" class="mensagem" role="status"></p>
+        </form>
+    </section>
+
+</section>
+<!-- FIM DA SEÇÃO DE TREINOS -->
+
 
 
         <!-- MÓDULO DE EXERCÍCIOS -->
