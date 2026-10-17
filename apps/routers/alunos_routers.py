@@ -13,7 +13,7 @@ aluno_service = AlunoService(aluno_repository,treino_repository)
 router = APIRouter(prefix = "/alunos", tags = ["Alunos"])
 
 # Criar aluno 
-@router.post("/{id_aluno}",status_code = status.HTTP_201_CREATED, response_model = AlunoCreate)
+@router.post("/",status_code = status.HTTP_201_CREATED, response_model = AlunoCreate)
 def cadastrar_alunos(alunoCreate: AlunoCreate):
     try:
         cadastro_aluno = aluno_service.cadastrar(
@@ -128,5 +128,5 @@ def desativar_aluno(id_aluno: int):
             )
         raise HTTPException(
             status_code = status.HTTP_409_CONFLICT,
-            detail = mensagem
+            detail = mensagem,
         )

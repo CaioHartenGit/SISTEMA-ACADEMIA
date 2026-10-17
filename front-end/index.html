@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema-Academia</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <h1>Sistema-Academia</h1>
+        <p>Gerenciamento de alunos, treinos e exercícios</p>
+        </header>
+
+        <nav class="menu">
+            <button type="button" data-secao="alunos">Alunos</button>
+            <button type="button" data-secao="treinos">Treinos</button>
+            <button type="button" data-secao="exercicios">Exercícios</button>
+        </nav>
+
+        <main class="conteudo">
+
+            <section id="secao-alunos" class="secao">
+                <h2>Alunos</h2>
+                <p>Consulte e gerencie os alunos cadastrados na academia.</p>
+                    <form id="form-aluno" class="formulario">
+        <div class="campo">
+            <label for="nome-aluno">Nome completo</label>
+            <input
+                type="text"
+                id="nome-aluno"
+                name="nome"
+                maxlength="100"
+                placeholder="Digite o nome do aluno"
+                required
+            >
+        </div>
+
+        <div class="campo">
+            <label for="idade-aluno">Idade</label>
+            <input
+                type="number"
+                id="idade-aluno"
+                name="idade"
+                min="1"
+                step="1"
+                placeholder="Ex.: 20"
+                required
+            >
+        </div>
+
+        <div class="campo">
+            <label for="plano-aluno">Plano</label>
+            <select id="plano-aluno" name="plano" required>
+                <option value="">Selecione um plano</option>
+                <option value="básico">Básico</option>
+                <option value="intermediário">Intermediário</option>
+                <option value="pro">Pro</option>
+            </select>
+        </div>
+
+        <button type="submit" id="btn-cadastrar-aluno">
+            Cadastrar aluno
+        </button>
+
+        <p id="mensagem-cadastro" role="status" aria-live="polite"></p>
+    </form>
+
+            <button type="button" id="btn-listar-alunos">
+                Atualizar lista
+            </button>
+
+            <div id="mensagem-alunos" role="status"></div>
+
+            <div id="lista-alunos">
+                Os alunos serão exibidos aqui.
+            </div>
+        </section>
+
+        <section id="secao-treinos" class="secao" hidden>
+            <h2>Treinos</h2>
+            <p>Em breve, você poderá consultar e gerenciar os treinos.</p>
+        </section>
+
+        <section id="secao-exercicios" class="secao" hidden>
+            <h2>Exercícios</h2>
+            <p>Em breve, você poderá consultar e gerenciar os exercícios.</p>
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+        <p>Sistema-Academia — Projeto de gerenciamento de academia</p>
+    </footer>
+
+    <script src="js/api.js" defer></script>
+    <script src="js/aluno.js" defer></script>
+    <script src="js/treino.js" defer></script>
+    <script src="js/exercicio.js" defer></script>
+</body>
+
+</html>
