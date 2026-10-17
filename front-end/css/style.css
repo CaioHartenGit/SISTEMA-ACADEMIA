@@ -353,3 +353,26 @@ button:disabled {
         white-space: nowrap;
     }
 }
+/* ======================================== */
+
+/* Ações da tabela de alunos */
+#lista-alunos td:last-child {
+    white-space: nowrap;
+}
+
+#lista-alunos td .botao-excluir {
+    margin-left: 8px;
+    background: #dc2626;
+    color: #ffffff;
+}
+
+#lista-alunos td .botao-excluir:hover {
+    background: #b91c1c;
+}
+
+@media (max-width: 650px) {
+    #lista-alunos td .botao-excluir {
+        margin-left: 4px;
+    }
+}
+

@@ -50,8 +50,9 @@ async function listarAlunos() {
             });
 
             const celulaAcoes = document.createElement("td");
-            const botaoEditar = document.createElement("button");
 
+            // Botão EDITAR
+            const botaoEditar = document.createElement("button");
             botaoEditar.type = "button";
             botaoEditar.textContent = "Editar";
 
@@ -59,7 +60,19 @@ async function listarAlunos() {
                 abrirEdicaoAluno(aluno);
             });
 
+            // Botão EXCLUIR
+            const botaoExcluir = document.createElement("button");
+            botaoExcluir.type = "button";
+            botaoExcluir.textContent = "Excluir";
+            botaoExcluir.classList.add("botao-excluir");
+
+            botaoExcluir.addEventListener("click", () => {
+                excluirAluno(aluno);
+            });
+
             celulaAcoes.appendChild(botaoEditar);
+            celulaAcoes.appendChild(botaoExcluir);
+
             linha.appendChild(celulaAcoes);
             corpoTabela.appendChild(linha);
         });
@@ -73,6 +86,8 @@ async function listarAlunos() {
     }
 }
 
+
+// Atualiza a lista
 document
     .getElementById("btn-listar-alunos")
     .addEventListener("click", listarAlunos);
@@ -190,3 +205,45 @@ document
         document.getElementById("cartao-edicao").hidden = true;
         document.getElementById("mensagem-edicao").textContent = "";
     });
+
+
+// EXCLUIR ALUNO
+async function excluirAluno(aluno) {
+    const confirmar = window.confirm(
+        `Tem certeza que deseja excluir o aluno ${aluno.nome} (ID ${aluno.id_aluno})?`
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    const mensagem = document.getElementById("mensagem-alunos");
+
+    mensagem.textContent = `Excluindo aluno ${aluno.nome}...`;
+
+    try {
+        await requisicaoAPI(`/alunos/${aluno.id_aluno}`, {
+            method: "DELETE"
+        });
+
+        mensagem.textContent = `Aluno ${aluno.nome} excluído com sucesso!`;
+
+        // Fecha a edição caso o aluno excluído estivesse selecionado
+        const idEmEdicao = document.getElementById("editar-id-aluno").value;
+
+        if (String(idEmEdicao) === String(aluno.id_aluno)) {
+            formularioEdicao.reset();
+            document.getElementById("cartao-edicao").hidden = true;
+            document.getElementById("mensagem-edicao").textContent = "";
+        }
+
+        await listarAlunos();
+
+        // Mantém a confirmação visível depois de atualizar a tabela
+        mensagem.textContent = `Aluno ${aluno.nome} excluído com sucesso!`;
+
+    } catch (erro) {
+        mensagem.textContent =
+            `Erro ao excluir aluno: ${erro.message}`;
+    }
+}
