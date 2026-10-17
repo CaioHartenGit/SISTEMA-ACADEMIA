@@ -1,20 +1,14 @@
 
-/* ==========================================
-   FORMA — MÓDULO DE TREINOS
-   Identidade visual alinhada ao módulo Alunos
-   ========================================== */
-
+/* FORMA — MÓDULO DE TREINOS: Identidade visual alinhada ao módulo Alunos */
 #secao-treinos {
     color: #25324a;
 }
-
 /* Cabeçalho do módulo */
 #secao-treinos .cabecalho-modulo {
     margin-bottom: 26px;
     padding-bottom: 24px;
     border-bottom: 1px solid #e5eaf3;
 }
-
 #secao-treinos .cabecalho-modulo h2 {
     margin: 8px 0;
     color: #14213d;
@@ -22,13 +16,11 @@
     font-weight: 800;
     letter-spacing: -0.7px;
 }
-
 #secao-treinos .cabecalho-modulo p {
     color: #7a89a5;
     font-size: 14px;
     line-height: 1.6;
 }
-
 /* Painéis */
 #secao-treinos .painel {
     margin-bottom: 20px;
@@ -39,12 +31,10 @@
     box-shadow: 0 5px 16px rgba(27, 44, 79, 0.045);
     transition: box-shadow 180ms ease, border-color 180ms ease;
 }
-
 #secao-treinos .painel:hover {
     border-color: #d7e1f4;
     box-shadow: 0 8px 22px rgba(27, 44, 79, 0.065);
 }
-
 /* Etiquetas das seções */
 #secao-treinos .etiqueta-secao {
     display: inline-block;
@@ -54,7 +44,6 @@
     font-weight: 800;
     letter-spacing: 1.1px;
 }
-
 /* Cabeçalhos dos painéis */
 #secao-treinos .cabecalho-painel h2,
 #secao-treinos .cabecalho-listagem h2 {
@@ -63,7 +52,6 @@
     font-size: 16px;
     font-weight: 800;
 }
-
 #secao-treinos .cabecalho-painel p,
 #secao-treinos .cabecalho-listagem p {
     margin: 0;
@@ -71,7 +59,6 @@
     font-size: 13px;
     line-height: 1.6;
 }
-
 /* Formulários */
 #secao-treinos .formulario,
 #secao-treinos .formulario-busca {
@@ -79,19 +66,16 @@
     flex-direction: column;
     gap: 17px;
 }
-
 #secao-treinos .campo {
     display: flex;
     flex-direction: column;
     gap: 7px;
 }
-
 #secao-treinos .campo label {
     color: #374663;
     font-size: 13px;
     font-weight: 750;
 }
-
 #secao-treinos .campo input,
 #secao-treinos .campo select,
 #secao-treinos .campo textarea {
@@ -107,12 +91,10 @@
     font-size: 14px;
     transition: border-color 160ms ease, box-shadow 160ms ease;
 }
-
 #secao-treinos .campo input::placeholder,
 #secao-treinos .campo textarea::placeholder {
     color: #a1aec4;
 }
-
 #secao-treinos .campo input:focus,
 #secao-treinos .campo select:focus,
 #secao-treinos .campo textarea:focus {
@@ -120,7 +102,6 @@
     border-color: #3563ff;
     box-shadow: 0 0 0 3px rgba(53, 99, 255, 0.11);
 }
-
 /* Botões */
 #secao-treinos .botao {
     box-sizing: border-box;
@@ -138,60 +119,50 @@
     transition: background 160ms ease, border-color 160ms ease,
                 box-shadow 160ms ease, transform 160ms ease;
 }
-
 #secao-treinos .botao:active {
     transform: translateY(1px);
 }
-
 #secao-treinos .botao-principal {
     color: #fff;
     background: #3563f5;
     border-color: #3563f5;
     box-shadow: 0 3px 7px rgba(53, 99, 245, 0.17);
 }
-
 #secao-treinos .botao-principal:hover {
     background: #2853e5;
     border-color: #2853e5;
 }
-
 #secao-treinos .botao-consulta,
 #secao-treinos .botao-secundario {
     color: #3158c9;
     background: #f2f5ff;
     border-color: #dfe7ff;
 }
-
 #secao-treinos .botao-consulta:hover,
 #secao-treinos .botao-secundario:hover {
     background: #e8eeff;
     border-color: #cbd8ff;
 }
-
 #secao-treinos .botao-limpar {
     color: #71809b;
     background: #fff;
     border-color: #e1e7f0;
 }
-
 #secao-treinos .botao-limpar:hover {
     color: #3158c9;
     background: #f7f9ff;
 }
-
 /* Botão de exclusão — vermelho como no módulo Alunos */
 #secao-treinos .botao-perigo {
     color: #e63946;
     background: #fff1f2;
     border-color: #ffd7dc;
 }
-
 #secao-treinos .botao-perigo:hover {
     color: #c92335;
     background: #ffe5e8;
     border-color: #ffc2ca;
 }
-
 /* Busca e filtros */
 #secao-treinos .consultas-grid {
     display: grid;
@@ -199,26 +170,21 @@
     align-items: end;
     gap: 18px;
 }
-
 #secao-treinos .botao-consulta {
     width: 100%;
 }
-
 #secao-treinos .botao-limpar {
     margin-top: 16px;
 }
-
 /* Botões de busca dentro do formulário */
 #secao-treinos #form-busca-treino-aluno button {
     width: 100%;
 }
-
 /* Cabeçalho da listagem */
 #secao-treinos .cabecalho-listagem {
     padding: 23px 25px;
     border-bottom: 1px solid #e5eaf3;
 }
-
 #secao-treinos .barra-tabela {
     padding: 12px 16px;
     color: #647592;
@@ -229,11 +195,7 @@
     letter-spacing: 0.7px;
 }
 
-/* ==========================================
-   LISTAGEM DE TREINOS
-   Estrutura de cards alinhada ao módulo Alunos
-   ========================================== */
-
+/* LISTAGEM DE TREINOS: Estrutura de cards alinhada ao módulo Alunos */
 #secao-treinos #lista-treinos {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -242,7 +204,6 @@
     min-width: 0;
     padding: 20px;
 }
-
 /* Card individual */
 #secao-treinos #lista-treinos .registro-treino {
     box-sizing: border-box;
@@ -261,18 +222,15 @@
     transition: transform 180ms ease, box-shadow 180ms ease,
                 border-color 180ms ease;
 }
-
 #secao-treinos #lista-treinos .registro-treino:hover {
     transform: translateY(-2px);
     border-color: #d4dfff;
     box-shadow: 0 8px 18px rgba(27, 44, 79, 0.075);
 }
-
 /* Área de informações */
 #secao-treinos .registro-treino-informacoes {
     min-width: 0;
 }
-
 /* Identificação TREINO #30 */
 #secao-treinos .registro-treino .etiqueta-secao {
     display: inline-flex;
@@ -287,7 +245,6 @@
     font-weight: 850;
     letter-spacing: 0.8px;
 }
-
 /* Nome do treino */
 #secao-treinos .registro-treino h3 {
     margin: 0 0 17px;
@@ -300,7 +257,6 @@
     letter-spacing: -0.25px;
     overflow-wrap: anywhere;
 }
-
 /* ID do aluno e dia da semana */
 #secao-treinos .registro-treino p {
     display: flex;
@@ -312,16 +268,13 @@
     font-size: 13px;
     line-height: 1.6;
 }
-
 #secao-treinos .registro-treino p:last-child {
     margin-bottom: 0;
 }
-
 #secao-treinos .registro-treino p strong {
     color: #34435f;
     font-weight: 750;
 }
-
 /* Área de ações: alinhada e consistente */
 #secao-treinos .acoes-registro {
     display: flex;
@@ -332,7 +285,6 @@
     padding-top: 15px;
     border-top: 1px solid #edf0f7;
 }
-
 #secao-treinos .acoes-registro .botao {
     min-height: 37px;
     margin: 0;
@@ -340,32 +292,27 @@
     border-radius: 7px;
     font-size: 12px;
 }
-
 /* Editar */
 #secao-treinos .acoes-registro .botao-secundario {
     color: #3158c9;
     background: #f0f4ff;
     border: 1px solid #dfe7ff;
 }
-
 #secao-treinos .acoes-registro .botao-secundario:hover {
     background: #e4ebff;
     border-color: #cbd8ff;
 }
-
 /* Excluir */
 #secao-treinos .acoes-registro .botao-perigo {
     color: #e63946;
     background: #fff1f2;
     border: 1px solid #ffd7dc;
 }
-
 #secao-treinos .acoes-registro .botao-perigo:hover {
     color: #c92335;
     background: #ffe5e8;
     border-color: #ffc2ca;
 }
-
 /* Estados de carregamento, vazio e erro */
 #secao-treinos #lista-treinos > .estado-vazio {
     grid-column: 1 / -1;
@@ -379,7 +326,6 @@
     font-size: 13px;
     line-height: 1.6;
 }
-
 /* Mensagens de sucesso, erro e informação */
 #secao-treinos .mensagem {
     margin-top: 12px;
@@ -388,33 +334,26 @@
     line-height: 1.6;
     overflow-wrap: anywhere;
 }
-
 #secao-treinos .mensagem:empty {
     display: none;
 }
-
 #secao-treinos .mensagem-sucesso {
     color: #16804a;
 }
-
 #secao-treinos .mensagem-erro {
     color: #d52b3b;
 }
-
 #secao-treinos .mensagem-info {
     color: #3158c9;
 }
-
 /* Formulário de edição */
 #secao-treinos #cartao-edicao-treino {
     margin-top: 20px;
     border-top: 3px solid #3563f5;
 }
-
 #secao-treinos #cartao-edicao-treino[hidden] {
     display: none !important;
 }
-
 /* Foco acessível */
 #secao-treinos button:focus-visible,
 #secao-treinos input:focus-visible,
@@ -424,47 +363,36 @@
     outline-offset: 2px;
 }
 
-/* ==========================================
-   RESPONSIVIDADE
-   ========================================== */
-
+/* RESPONSIVIDADE */
 @media (max-width: 800px) {
     #secao-treinos .consultas-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
     #secao-treinos #lista-treinos {
         grid-template-columns: 1fr;
     }
 }
-
 @media (max-width: 550px) {
     #secao-treinos .cabecalho-modulo h2 {
         font-size: 25px;
     }
-
     #secao-treinos .painel {
         padding: 18px;
     }
-
     #secao-treinos .consultas-grid {
         grid-template-columns: 1fr;
     }
-
     #secao-treinos .cabecalho-listagem {
         padding: 18px;
     }
-
     #secao-treinos #lista-treinos {
         grid-template-columns: 1fr;
         gap: 12px;
         padding: 12px;
     }
-
     #secao-treinos #lista-treinos .registro-treino {
         padding: 16px;
     }
-
     #secao-treinos .acoes-registro {
         gap: 8px;
     }

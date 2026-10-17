@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/treinos.css">
+     <link rel="stylesheet" href="css/exercicio.css">
+
 
     <script src="js/api.js" defer></script>
     <script src="js/aluno.js" defer></script>
@@ -972,47 +974,181 @@
 
 
 
-        <!-- MÓDULO DE EXERCÍCIOS -->
-        <section
-            id="secao-exercicios"
-            class="secao"
-            hidden
-        >
+      <section id="secao-exercicios" class="secao">
+    <div class="cabecalho-secao">
+        <h2>Exercícios</h2>
+        <p>Cadastre, consulte e gerencie os exercícios dos treinos.</p>
+    </div>
 
-            <header class="cabecalho-modulo">
+    <div class="painel">
+        <h3>Cadastrar exercício</h3>
 
-                <span class="etiqueta-secao">
-                    MÓDULO 03
-                </span>
-
-                <h2>Gestão de exercícios</h2>
-
-                <p>
-                    Organize os exercícios que fazem parte dos treinos.
-                </p>
-
-            </header>
-
-
-            <div class="painel painel-em-construcao">
-
-                <span
-                    class="icone-modulo"
-                    aria-hidden="true"
+        <form id="form-exercicio" class="formulario">
+            <div class="campo">
+                <label for="nome-exercicio">Nome do exercício</label>
+                <input
+                    type="text"
+                    id="nome-exercicio"
+                    name="nome"
+                    minlength="5"
+                    maxlength="100"
+                    placeholder="Ex.: Supino reto"
+                    required
                 >
-                    03
-                </span>
-
-                <h3>Área de exercícios</h3>
-
-                <p>
-                    Este espaço está reservado para as funcionalidades
-                    de gerenciamento de exercícios.
-                </p>
-
             </div>
 
-        </section>
+            <div class="grupo-campos">
+                <div class="campo">
+                    <label for="series-exercicio">Séries</label>
+                    <input
+                        type="number"
+                        id="series-exercicio"
+                        name="series"
+                        min="1"
+                        placeholder="Ex.: 4"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="repeticoes-exercicio">Repetições</label>
+                    <input
+                        type="number"
+                        id="repeticoes-exercicio"
+                        name="repeticoes"
+                        min="1"
+                        placeholder="Ex.: 12"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="id-treino-exercicio">ID do treino</label>
+                    <input
+                        type="number"
+                        id="id-treino-exercicio"
+                        name="id_treino"
+                        min="1"
+                        placeholder="Ex.: 1"
+                        required
+                    >
+                </div>
+            </div>
+
+            <button type="submit" class="botao">
+                Cadastrar exercício
+            </button>
+
+            <p id="mensagem-exercicios" class="mensagem" role="status"></p>
+        </form>
+    </div>
+
+    <div class="painel">
+        <h3>Consultar exercícios</h3>
+
+        <form id="form-busca-exercicio" class="formulario">
+            <div class="campo">
+                <label for="busca-id-treino-exercicio">ID do treino</label>
+                <input
+                    type="number"
+                    id="busca-id-treino-exercicio"
+                    min="1"
+                    placeholder="Digite o ID do treino"
+                    required
+                >
+            </div>
+
+            <div class="acoes-formulario">
+                <button type="submit" class="botao">
+                    Buscar exercícios
+                </button>
+
+                <button
+                    type="button"
+                    id="btn-listar-exercicios"
+                    class="botao botao-secundario"
+                >
+                    Listar
+                </button>
+
+                <button
+                    type="button"
+                    id="btn-limpar-busca-exercicio"
+                    class="botao botao-secundario"
+                >
+                    Limpar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="painel">
+        <h3>Exercícios cadastrados</h3>
+
+        <div id="lista-exercicios" class="lista-registros">
+            <p class="estado-vazio">
+                Informe o ID de um treino para consultar os exercícios.
+            </p>
+        </div>
+    </div>
+
+    <div id="cartao-edicao-exercicio" class="painel" hidden>
+        <h3>Editar exercício</h3>
+
+        <form id="form-editar-exercicio" class="formulario">
+            <input type="hidden" id="editar-id-exercicio">
+
+            <div class="campo">
+                <label for="editar-nome-exercicio">Nome do exercício</label>
+                <input
+                    type="text"
+                    id="editar-nome-exercicio"
+                    minlength="5"
+                    maxlength="100"
+                    required
+                >
+            </div>
+
+            <div class="grupo-campos">
+                <div class="campo">
+                    <label for="editar-series-exercicio">Séries</label>
+                    <input
+                        type="number"
+                        id="editar-series-exercicio"
+                        min="1"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="editar-repeticoes-exercicio">Repetições</label>
+                    <input
+                        type="number"
+                        id="editar-repeticoes-exercicio"
+                        min="1"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="acoes-formulario">
+                <button type="submit" class="botao">
+                    Salvar alterações
+                </button>
+
+                <button
+                    type="button"
+                    id="btn-cancelar-edicao-exercicio"
+                    class="botao botao-secundario"
+                >
+                    Cancelar
+                </button>
+            </div>
+
+            <p id="mensagem-edicao-exercicio" class="mensagem" role="status"></p>
+        </form>
+    </div>
+</section>
 
 
         <!-- RODAPÉ PRINCIPAL -->
