@@ -390,17 +390,18 @@
               <form id="form-editar-aluno" class="formulario">
                 <input type="hidden" id="editar-id-aluno" name="id" />
 
-                <div class="campo">
-                  <label for="editar-nome-aluno"> Nome completo </label>
-
-                  <input
-                    type="text"
-                    id="editar-nome-aluno"
-                    name="nome"
-                    autocomplete="name"
-                    required
-                  />
-                </div>
+            <div class="campo">
+           <label for="editar-nome-aluno">Nome completo</label>
+              <input
+                type="text"
+                id="editar-nome-aluno"
+                name="nome"
+                autocomplete="name"
+                readonly
+                title="O nome do aluno não pode ser alterado."
+              />
+              <small>O nome não pode ser alterado nesta tela.</small>
+            </div>
 
                 <div class="campo">
                   <label for="editar-idade-aluno"> Idade </label>
