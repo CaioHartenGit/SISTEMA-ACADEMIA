@@ -1,43 +1,74 @@
+from fastapi import FastAPI, HTTPException
+
+from fastapi.middleware.cors import CORSMiddleware
+
 from apps.repositories.aluno_repository import AlunoRepository
 from apps.services.aluno_service import AlunoService
+
 from apps.repositories.treino_repository import TreinoRepository
 from apps.services.treino_service import TreinoService
+
 from apps.repositories.exercicio_repository import ExercicioRepository
 from apps.services.exercicio_service import ExercicioService
 
+from apps.routers.alunos_routers import router as aluno_router
+from apps.routers.treinos_routers import router as treino_router
+from apps.routers.exercicios_routers import router as exercicio_router
 
-from fastapi import FastAPI, HTTPException
-from routers.alunos_routers import router as aluno_router
-from routers.treinos_routers import router as treino_router
+
 # ============================================================
 # REPOSITORIES
 # ============================================================
+
 aluno_repository = AlunoRepository()
 treino_repository = TreinoRepository()
 exercicio_repository = ExercicioRepository()
+
+
 # ============================================================
 # SERVICES
-# ===========================================================
-aluno_service = AlunoService(aluno_repository)
-treino_service = TreinoService(treino_repository)
-exercicio_service = ExercicioService(exercicio_repository)
-# ===========================================================
-# FUNÇÕES AUXILIARES
 # ============================================================
 
+aluno_service = AlunoService(
+    aluno_repository,
+    treino_repository
+)
+
+treino_service = TreinoService(
+    treino_repository,
+    exercicio_repository,
+    aluno_repository
+)
+
+exercicio_service = ExercicioService(
+    exercicio_repository,
+    treino_repository
+)
 
 
-
-
-
-
+# ============================================================
+# FASTAPI
+# ============================================================
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://127.0.0.1:5500",
+        "http://localhost:5500",
+        "http://127.0.0.1:8000",
+        "http://localhost:8000",
+    ],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(aluno_router)
 app.include_router(treino_router)
-
-
+app.include_router(exercicio_router)
 
 
 
