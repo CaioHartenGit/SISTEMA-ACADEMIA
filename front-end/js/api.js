@@ -1,7 +1,7 @@
 /* API.JS — CONEXÃO COM O BACKEND: Sistema Forma | Gestão de Academia */
 
 // URL base da API
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://sistema-academia-7w5d.onrender.com";
 
 /* FUNÇÃO COMPARTILHADA DE REQUISIÇÕES */
 async function requisicaoAPI(endpoint, opcoes = {}) {
