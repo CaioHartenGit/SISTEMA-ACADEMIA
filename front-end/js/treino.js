@@ -8,7 +8,7 @@
    DELETE /treinos/{id_treino}
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
-  const API_BASE_URL = "http://127.0.0.1:8000";
+  const API_BASE_URL = "https://sistema-academia-7w5d.onrender.com";
   // Formulários
   const formTreino = document.getElementById("form-treino");
   const formBuscaTreino = document.getElementById("form-busca-treino-aluno");
