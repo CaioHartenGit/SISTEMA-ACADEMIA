@@ -1,139 +1,132 @@
 # 🏋️ FORMA — Sistema de Gestão de Academia
 
-Sistema web para gerenciamento de academias, desenvolvido para centralizar o cadastro de alunos, a organização de treinos e o gerenciamento de exercícios em uma única interface administrativa.
+O **FORMA** é um sistema de gestão de academia desenvolvido para facilitar o gerenciamento de alunos, treinos e exercícios em um único ambiente. O projeto utiliza uma API REST desenvolvida em Python com FastAPI, integrada a um banco de dados PostgreSQL, e uma interface web construída com HTML, CSS e JavaScript.
 
-O projeto utiliza uma API REST desenvolvida em Python com FastAPI, banco de dados PostgreSQL e uma interface construída com HTML, CSS e JavaScript.
+O projeto foi desenvolvido com foco na organização do código, na separação de responsabilidades e na integração entre frontend e backend, aplicando conceitos importantes do desenvolvimento de software.
 
-**Repositório:** [CaioHartenGit/Sistema-Academia](https://github.com/CaioHartenGit/Sistema-Academia)
+## 🌐 Acesse o projeto
 
-## 📌 Funcionalidades
+- **Aplicação web:** https://projetosistemaacademia.netlify.app/
+- **API — Backend:** https://sistema-academia-7w5d.onrender.com/
+- **Documentação interativa da API (Swagger):** https://sistema-academia-7w5d.onrender.com/docs
+- **Repositório GitHub:** https://github.com/CaioHartenGit/Sistema-Academia
+
+## ✨ Funcionalidades
 
 ### 👤 Gerenciamento de alunos
 
-- Cadastro de alunos com nome completo, idade e plano contratado.
-- Listagem dos alunos cadastrados em uma tabela dinâmica.
-- Consulta individual por identificador (ID).
-- Pesquisa por nome.
-- Filtragem por plano contratado.
-- Edição dos dados cadastrais.
+- Cadastro de alunos.
+- Consulta e visualização de alunos cadastrados.
+- Atualização dos dados dos alunos.
 - Exclusão de registros.
-- Ativação e desativação de alunos.
-- Indicadores com o total de alunos cadastrados, ativos e inativos.
-- Atualização da listagem e dos indicadores após as operações.
+- Integração com o backend para persistência das informações.
 
-### 🏋️ Gerenciamento de treinos
+### 💪 Gerenciamento de treinos
 
-- Cadastro de treinos vinculados a alunos.
-- Definição do nome e do dia da semana.
-- Listagem de todos os treinos cadastrados.
-- Consulta dos treinos associados a um aluno por ID.
-- Atualização dos dados de um treino.
+- Cadastro de treinos associados aos alunos.
+- Consulta dos treinos de um aluno.
+- Edição dos treinos cadastrados.
 - Exclusão de treinos.
-- Exibição dos dados dos treinos em registros organizados na interface.
+- Exibição de mensagens de erro relacionadas à exclusão dentro do card do treino correspondente, facilitando a identificação de problemas.
+- Integração com a API para realizar as operações de gerenciamento.
 
-### 💪 Gerenciamento de exercícios
+### 🏃 Gerenciamento de exercícios
 
-- Cadastro de exercícios com nome, número de séries e repetições.
-- Associação de exercícios a treinos por meio do ID.
-- Consulta dos exercícios de um treino específico.
-- Listagem dos exercícios cadastrados no contexto de consulta.
-- Edição das informações de um exercício.
-- Exclusão de exercícios.
-- Validação dos campos dos formulários.
+- Cadastro de exercícios.
+- Consulta dos exercícios cadastrados.
+- Atualização e exclusão de registros, conforme as operações disponibilizadas pelo backend.
+- Integração entre a interface web e a API.
 
-## 🎨 Interface e experiência de uso
-
-A interface administrativa **Forma | Gestão de Academia** foi desenvolvida para oferecer uma experiência organizada e intuitiva.
-
-Entre os recursos implementados estão:
-
-- Navegação entre os módulos de alunos, treinos e exercícios.
-- Identidade visual própria para o sistema.
-- Layouts e estilos CSS separados por módulo.
-- Formulários para cadastro, consulta e edição.
-- Tabelas e registros gerados dinamicamente com JavaScript.
-- Mensagens de sucesso e erro nas operações.
-- Confirmação antes de operações destrutivas ou alterações de status.
-- Indicadores administrativos para acompanhamento dos cadastros.
-- Campos com validações HTML e restrições de preenchimento.
-- Integração entre a interface e a API por meio de requisições HTTP.
+> **Observação:** as funcionalidades disponíveis dependem das operações implementadas e configuradas em cada módulo do projeto.
 
 ## 🛠️ Tecnologias utilizadas
 
-### Front-end
+### Frontend
 
-- **HTML5:** estruturação das páginas e formulários.
-- **CSS3:** identidade visual, layouts e estilização dos módulos.
-- **JavaScript:** interatividade, validação, manipulação do DOM e comunicação com a API.
+- **HTML5:** estrutura das páginas.
+- **CSS3:** estilização e organização visual da interface.
+- **JavaScript:** interatividade, validações e comunicação com a API.
+- **Fetch API:** realização de requisições HTTP ao backend.
 
-### Back-end
+### Backend
 
-- **Python:** linguagem utilizada na implementação da lógica da aplicação.
-- **FastAPI:** construção da API REST e definição dos endpoints.
-- **Pydantic:** validação e estruturação dos dados de entrada e saída.
-- **Psycopg 3:** comunicação com o PostgreSQL.
+- **Python:** linguagem utilizada no desenvolvimento da aplicação.
+- **FastAPI:** framework para criação da API REST.
+- **Pydantic:** validação e estruturação dos dados recebidos e enviados pela API.
+- **Psycopg:** conexão e comunicação com o banco de dados PostgreSQL.
 
-### Banco de dados e ferramentas
+### Banco de dados e infraestrutura
 
-- **PostgreSQL:** banco de dados relacional para persistência das informações.
-- **Git:** controle de versão.
-- **GitHub:** hospedagem e compartilhamento do código-fonte.
+- **PostgreSQL:** armazenamento persistente dos dados.
+- **Neon:** hospedagem do banco de dados PostgreSQL.
+- **Render:** hospedagem do backend.
+- **Netlify:** publicação do frontend.
+- **Git e GitHub:** versionamento e gerenciamento do código-fonte.
 
-## 🧱 Arquitetura do projeto
+## 🏗️ Arquitetura do projeto
 
-O back-end está organizado em camadas, separando as responsabilidades da aplicação:
+O backend está organizado em camadas, separando as responsabilidades de cada parte da aplicação. Essa organização facilita a manutenção, a leitura e a evolução do código.
 
-- **Routers:** recebem as requisições HTTP e definem os endpoints.
-- **Schemas:** definem os formatos e as validações dos dados.
-- **Services:** concentram as regras e operações da aplicação.
-- **Repositories:** executam as operações de acesso ao banco de dados.
-- **Entities:** representam os objetos utilizados pelo sistema.
-- **Database:** concentra a configuração de conexão com o PostgreSQL.
+| Camada | Responsabilidade |
+|---|---|
+| `entities` | Representação das entidades do sistema. |
+| `schemas` | Estruturação e validação dos dados de entrada e saída. |
+| `repositories` | Acesso e operações relacionadas ao banco de dados. |
+| `services` | Implementação das regras de negócio. |
+| `routers` | Definição das rotas e dos endpoints da API. |
+| `database` | Configuração da conexão com o banco de dados. |
 
-Essa organização facilita a manutenção, a compreensão do código e a evolução das funcionalidades.
+O frontend é responsável pela interface com o usuário e se comunica com o backend por meio de requisições HTTP.
 
-## 📂 Estrutura do projeto
+## 📁 Estrutura de pastas
 
 ```text
 Sistema-Academia/
+│
 ├── apps/
 │   ├── database/
 │   │   └── conexao.py
+│   │
 │   ├── entities/
 │   │   ├── aluno.py
 │   │   ├── treino.py
 │   │   └── exercicio.py
+│   │
 │   ├── repositories/
 │   │   ├── aluno_repository.py
 │   │   ├── treino_repository.py
 │   │   └── exercicio_repository.py
+│   │
 │   ├── routers/
 │   │   ├── alunos_routers.py
 │   │   ├── treinos_routers.py
 │   │   └── exercicios_routers.py
+│   │
 │   ├── schemas/
 │   │   ├── alunos_schemas.py
 │   │   ├── treino_schemas.py
 │   │   └── exercicios_schemas.py
+│   │
 │   ├── services/
 │   │   ├── aluno_service.py
 │   │   ├── treino_service.py
 │   │   └── exercicio_service.py
+│   │
 │   └── main.py
+│
 ├── front-end/
 │   ├── css/
-│   │   ├── style.css
-│   │   ├── treinos.css
-│   │   └── exercicio.css
 │   ├── js/
 │   │   ├── api.js
 │   │   ├── aluno.js
 │   │   ├── treino.js
 │   │   └── exercicio.js
 │   └── index.html
+│
 ├── .env.example
 ├── .gitignore
 ├── pyproject.toml
+├── requirements.txt
 └── README.md
 ```
 
@@ -141,156 +134,162 @@ Sistema-Academia/
 
 ### 1. Pré-requisitos
 
-Antes de iniciar, instale:
+Antes de começar, certifique-se de ter instalado:
 
-- Python 3.10 ou superior.
-- PostgreSQL.
+- Python compatível com as dependências do projeto.
 - Git.
 - Um navegador atualizado.
+- Acesso a uma instância PostgreSQL configurada para a aplicação.
 
-### 2. Clonar o repositório
+### 2. Clone o repositório
 
 ```bash
 git clone https://github.com/CaioHartenGit/Sistema-Academia.git
+```
+
+Entre na pasta do projeto:
+
+```bash
 cd Sistema-Academia
 ```
 
-### 3. Criar um ambiente virtual
-
-No macOS ou Linux:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-No Windows:
+### 3. Crie um ambiente virtual
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
 ```
 
-### 4. Instalar as dependências
+Ative o ambiente virtual.
+
+**macOS ou Linux:**
 
 ```bash
-pip install -e .
-pip install python-dotenv
+source .venv/bin/activate
 ```
 
-O projeto utiliza as dependências declaradas no `pyproject.toml` e o pacote `python-dotenv` para carregar as variáveis de ambiente.
+**Windows (PowerShell):**
 
-### 5. Configurar o banco de dados
-
-Crie o banco de dados PostgreSQL e configure as credenciais utilizadas pela aplicação.
-
-Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
-
-```env
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=academia
-DB_USER=postgres
-DB_PASSWORD=sua_senha
+```powershell
+.venv\Scripts\Activate.ps1
 ```
 
-Substitua os valores pelos dados do seu ambiente.
+### 4. Instale as dependências
 
-**Importante:** as tabelas e os relacionamentos necessários devem estar configurados no banco de dados antes de executar a aplicação.
+```bash
+pip install -r requirements.txt
+```
 
-Não compartilhe o arquivo `.env` nem publique credenciais reais no GitHub.
+### 5. Configure as variáveis de ambiente
 
-### 6. Iniciar o back-end
+Crie um arquivo `.env` com as configurações necessárias para conectar a aplicação ao PostgreSQL.
 
-Com o ambiente virtual ativado e o PostgreSQL em execução, inicie a API a partir da raiz do projeto:
+Utilize o arquivo `.env.example` como referência e preencha os valores de acordo com a configuração utilizada no projeto.
+
+> **Importante:** nunca envie senhas, credenciais ou outras informações sensíveis para o GitHub. O arquivo `.env` deve permanecer fora do controle de versão.
+
+### 6. Inicie o backend
+
+Na raiz do projeto, execute:
 
 ```bash
 uvicorn apps.main:app --reload
 ```
 
-Esse comando pressupõe que os imports dos routers estejam ajustados à estrutura de pacotes do projeto e que todos os routers necessários estejam registrados na aplicação FastAPI.
+Se a configuração estiver correta, a API ficará disponível localmente em:
 
-### 7. Iniciar o front-end
+- **API:** http://127.0.0.1:8000
+- **Swagger:** http://127.0.0.1:8000/docs
+
+### 7. Inicie o frontend
 
 Em outro terminal, na raiz do projeto, execute:
 
 ```bash
-python3 -m http.server 5500 --directory front-end
+python -m http.server 5500 --directory front-end
 ```
 
-Abra o endereço abaixo no navegador:
+Depois, abra:
 
 http://127.0.0.1:5500
 
-O front-end precisa estar configurado para se comunicar com o endereço da API em execução.
+**Atenção:** confirme se o frontend está configurado para utilizar o endereço local da API (`http://127.0.0.1:8000`) durante os testes. Caso esteja apontando para o backend publicado, ajuste a configuração de acordo com o ambiente.
 
-### 8. Acessar a documentação da API
+## 🔌 API REST
 
-Com o back-end iniciado, acesse:
+O backend disponibiliza endpoints para as operações dos módulos de alunos, treinos e exercícios.
 
-- **Swagger UI:** http://127.0.0.1:8000/docs
-- **OpenAPI:** http://127.0.0.1:8000/openapi.json
+A documentação interativa do FastAPI permite consultar as rotas disponíveis, verificar os parâmetros necessários e testar as requisições diretamente pelo navegador.
 
-A documentação interativa permite consultar os endpoints e testar as requisições da API.
+**Documentação:** https://sistema-academia-7w5d.onrender.com/docs
 
-## 🔌 Principais endpoints da API
+Entre os métodos HTTP utilizados em APIs REST estão:
 
-Os routers do projeto definem operações para os seguintes recursos:
+| Método | Finalidade comum |
+|---|---|
+| `GET` | Consultar informações. |
+| `POST` | Criar registros. |
+| `PUT` | Atualizar um recurso. |
+| `PATCH` | Atualizar parcialmente um recurso. |
+| `DELETE` | Excluir registros. |
 
-| Método | Endpoint | Operação |
-|---|---|---|
-| GET | `/alunos/` | Listar alunos |
-| POST | `/alunos/` | Cadastrar aluno |
-| GET | `/alunos/{id_aluno}` | Buscar aluno por ID |
-| GET | `/alunos/nome/{nome}` | Buscar alunos por nome |
-| GET | `/alunos/plano/{plano}` | Filtrar alunos por plano |
-| PUT | `/alunos/{id_aluno}` | Atualizar aluno |
-| DELETE | `/alunos/{id_aluno}` | Excluir aluno |
-| PATCH | `/alunos/{id_aluno}/ativar` | Ativar aluno |
-| PATCH | `/alunos/{id_aluno}/desativar` | Desativar aluno |
-| GET | `/treinos/` | Listar treinos |
-| POST | `/treinos/` | Cadastrar treino |
-| GET | `/treinos/{id_aluno}` | Consultar treinos de um aluno |
-| PUT | `/treinos/{id_aluno}` | Atualizar treino conforme a implementação atual |
-| DELETE | `/treinos/{id_treino}` | Excluir treino |
-| POST | `/exercicios/` | Cadastrar exercício |
-| GET | `/exercicios/{id_treino}` | Consultar exercícios de um treino |
-| PUT | `/exercicios/{id_exercicio}` | Atualizar exercício |
-| DELETE | `/exercicios/{id_exercicio}` | Excluir exercício |
+Os endpoints, parâmetros e métodos efetivamente disponíveis devem ser consultados na documentação Swagger da aplicação.
 
-**Observação:** a disponibilidade efetiva dos endpoints depende de seus respectivos routers estarem registrados na aplicação FastAPI.
+## ☁️ Deploy e hospedagem
 
-## 🔒 Validação e tratamento de erros
+O projeto utiliza serviços de hospedagem separados para cada parte da aplicação:
 
-O projeto utiliza schemas para validar dados recebidos pela API e implementa tratamento de erros nas operações de gerenciamento.
+- **Frontend — Netlify:** disponibiliza a interface web.
+- **Backend — Render:** executa a API desenvolvida em Python com FastAPI.
+- **Banco de dados — Neon:** fornece o PostgreSQL utilizado para armazenar os dados.
 
-No front-end, as requisições são realizadas por JavaScript, que interpreta as respostas da API e apresenta mensagens de retorno ao usuário.
+Essa separação permite que a interface, a API e o banco de dados sejam configurados e mantidos de forma independente.
 
-As validações dos formulários também ajudam a evitar o envio de campos obrigatórios vazios e valores fora dos limites definidos.
+Para que a aplicação funcione corretamente em produção, é necessário garantir que:
 
-## 🚀 Preparação para deploy
+- O frontend esteja apontando para a URL correta da API.
+- As variáveis de ambiente do backend estejam configuradas no serviço de hospedagem.
+- O backend consiga estabelecer conexão com o PostgreSQL.
+- As configurações de CORS permitam as requisições originadas do domínio do frontend.
+- As credenciais e demais dados sensíveis sejam armazenados de forma segura.
 
-Antes de publicar o sistema em um ambiente de produção, é necessário:
+## 🔒 Boas práticas adotadas
 
-- Configurar o banco de dados em um serviço acessível pelo back-end.
-- Definir as variáveis de ambiente no ambiente de hospedagem.
-- Ajustar o endereço da API utilizado pelo front-end.
-- Configurar o CORS para permitir as origens autorizadas.
-- Confirmar que todos os routers estão registrados na aplicação.
-- Garantir que os imports funcionem no ambiente de produção.
-- Verificar a instalação de todas as dependências.
-- Testar os fluxos de cadastro, consulta, edição e exclusão.
-- Evitar a exposição de credenciais e informações sensíveis.
-- Utilizar HTTPS e configurações adequadas para produção.
+A organização do projeto busca favorecer:
+
+- Separação de responsabilidades entre as camadas.
+- Centralização do acesso ao banco de dados nos repositórios.
+- Organização das regras de negócio nos serviços.
+- Validação de dados por meio de schemas.
+- Separação entre interface web e API.
+- Versionamento do código com Git e GitHub.
+- Uso de variáveis de ambiente para configurações sensíveis.
+
+## 🚀 Melhorias futuras
+
+Algumas possibilidades para a evolução do projeto incluem:
+
+- Implementação de autenticação e autorização de usuários.
+- Criação de testes automatizados para os serviços e endpoints.
+- Melhorias na validação e no tratamento de erros.
+- Paginação e filtros para consultas com muitos registros.
+- Aprimoramento da responsividade e da acessibilidade da interface.
+- Monitoramento e registro de erros em produção.
+- Expansão das funcionalidades de gerenciamento de alunos, treinos e exercícios.
 
 ## 🎯 Objetivo do projeto
 
-O Sistema Forma foi desenvolvido para colocar em prática conhecimentos de desenvolvimento web, construção de APIs REST, programação em Python, manipulação do DOM, integração entre front-end e back-end e persistência de dados em bancos relacionais.
+O FORMA tem como objetivo desenvolver uma solução web para gerenciamento de academia, colocando em prática conhecimentos de desenvolvimento frontend, criação de APIs REST, integração com bancos de dados relacionais, organização de código e publicação de aplicações na internet.
 
-Além de servir como ferramenta de gerenciamento de academia, o projeto representa uma experiência prática de desenvolvimento full stack, organização de código e trabalho com tecnologias utilizadas no desenvolvimento de aplicações web.
+Além de atender à proposta funcional, o projeto representa uma oportunidade de aprendizado prático sobre o desenvolvimento de sistemas completos, desde a interface do usuário até a persistência dos dados.
+
+## 👨‍💻 Desenvolvedores
+
+Projeto desenvolvido como iniciativa prática de desenvolvimento de software, com colaboração entre seus participantes.
+
+**Repositório:** https://github.com/CaioHartenGit/Sistema-Academia
 
 ---
 
-**Projeto:** Sistema Forma | Gestão de Academia  
-**Repositório:** [GitHub — Sistema-Academia](https://github.com/CaioHartenGit/Sistema-Academia)  
-**Status:** funcionalidades de gerenciamento implementadas; configuração e validação do ambiente de produção pendentes.
+<p align="center">
+  Desenvolvido com dedicação, aprendizado e tecnologia. 💙
+</p>
