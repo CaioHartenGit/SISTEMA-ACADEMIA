@@ -461,7 +461,7 @@
 
       <!-- =====================================================
      SEÇÃO DE TREINOS
-     ===================================================== -->
+===================================================== -->
       <section id="secao-treinos" hidden>
         <div class="cabecalho-secao">
           <span class="etiqueta-secao">MÓDULO 02</span>
@@ -523,6 +523,7 @@
               </button>
             </div>
 
+            <!-- Mensagens exclusivas do cadastro -->
             <p id="mensagem-treinos" class="mensagem" role="status"></p>
           </form>
         </section>
@@ -536,6 +537,14 @@
               <p>Liste todos os treinos ou consulte pelo ID do aluno.</p>
             </div>
           </header>
+
+          <!-- Mensagens da consulta, busca e exclusão -->
+          <p
+            id="mensagem-consulta-treinos"
+            class="mensagem"
+            role="status"
+            aria-live="polite"
+          ></p>
 
           <!-- GET /treinos/{id_aluno} -->
           <form id="form-busca-treino-aluno" class="formulario">

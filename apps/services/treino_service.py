@@ -5,6 +5,7 @@ from apps.repositories.aluno_repository import AlunoRepository
 
 
 class TreinoService:
+
     def __init__(self, repository, exercicio_repository, aluno_repository):
         self.repository = repository
         self.exercicio_repository = exercicio_repository
@@ -14,35 +15,33 @@ class TreinoService:
         treino = TreinoCreate(nome, dia_semana, id_aluno)
 
         aluno = self.aluno_repository.buscar_por_id(treino.id_aluno)
+
         if aluno is None:
             raise ValueError("ID do aluno não existe")
-       
+
         return self.repository.inserir_Cadastrar(
             treino.nome,
             treino.dia_semana,
-            treino.id_aluno
+            treino.id_aluno,
         )
 
     def listar(self):
-        treinos = self.repository.listar()
-        return treinos
+        return self.repository.listar()
 
     def buscar_por_id(self, id_aluno):
-        treinos = self.repository.buscar_por_id(id_aluno)
-        return treinos
+        return self.repository.buscar_por_id(id_aluno)
 
-    def alterar(self, id_aluno, dia_semana, novo_dia_semana):
-        try:
-            treinos = self.repository.alterar_treino(
-                id_aluno,
-                dia_semana,
-                novo_dia_semana
-            )
-        except ValueError:
-            if treinos is None:
-                return None
+    def alterar(self, id_treino, nome, novo_dia_semana):
+        treino = self.repository.alterar_treino(
+            id_treino,
+            nome,
+            novo_dia_semana,
+        )
 
-        return treinos
+        if treino is None:
+            return None
+
+        return treino
 
     def deletar(self, id_treino):
         exercicios = self.exercicio_repository.listar_por_id(id_treino)
@@ -54,4 +53,3 @@ class TreinoService:
             )
 
         return self.repository.delete_treino(id_treino)
-

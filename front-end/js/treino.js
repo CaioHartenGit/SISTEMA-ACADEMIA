@@ -42,14 +42,26 @@ document.addEventListener("DOMContentLoaded", () => {
     "editar-dia-semana-treino"
   );
 
-  // Listagem e mensagens
+  // Listagem e mensagens separadas por área
   const listaTreinos = document.getElementById("lista-treinos");
+
+  // Mensagem exclusiva do cadastro
   const mensagemTreinos = document.getElementById("mensagem-treinos");
+
+  // Mensagem da consulta, busca e exclusão
+  const mensagemConsultaTreinos = document.getElementById(
+    "mensagem-consulta-treinos"
+  );
+
+  // Mensagem exclusiva da edição
   const mensagemEdicao = document.getElementById(
     "mensagem-edicao-treino"
   );
+
   const btnListarTreinos = document.getElementById("btn-listar-treinos");
-  const btnLimparBusca = document.getElementById("btn-limpar-busca-treino");
+  const btnLimparBusca = document.getElementById(
+    "btn-limpar-busca-treino"
+  );
   const btnCancelarEdicao = document.getElementById(
     "btn-cancelar-edicao-treino"
   );
@@ -69,7 +81,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .replace(/[\u0300-\u036f]/g, "");
   }
 
-  /* REQUISIÇÕES À API */
+  /* =====================================================
+     REQUISIÇÕES À API
+     ===================================================== */
   async function requisicaoAPI(endpoint, opcoes = {}) {
     const resposta = await fetch(`${API_BASE_URL}${endpoint}`, {
       ...opcoes,
@@ -100,6 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return texto ? JSON.parse(texto) : null;
   }
 
+  /* =====================================================
+     MENSAGENS
+     ===================================================== */
   function exibirMensagem(elemento, texto, tipo = "info") {
     if (!elemento) return;
 
@@ -114,6 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
     elemento.className = "mensagem";
   }
 
+  /* =====================================================
+     FUNÇÕES AUXILIARES
+     ===================================================== */
   function obterLista(dados) {
     if (Array.isArray(dados)) return dados;
     if (Array.isArray(dados?.treinos)) return dados.treinos;
@@ -163,6 +183,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <p class="estado-vazio">Carregando treinos...</p>
     `;
 
+    // Limpa somente a mensagem do cadastro.
+    // Não apaga mensagens de exclusão na área de consulta.
     limparMensagem(mensagemTreinos);
 
     try {
@@ -179,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
 
       exibirMensagem(
-        mensagemTreinos,
+        mensagemConsultaTreinos,
         `Erro ao listar treinos: ${erro.message}`,
         "erro"
       );
@@ -275,8 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const nome = nomeTreino?.value.trim();
       const idAluno = Number(idAlunoTreino?.value);
-
-      // Converte "Terça-feira" para "terca", por exemplo.
       const dia = normalizarDiaSemana(diaSemanaTreino?.value);
 
       if (!nome || !idAluno || idAluno <= 0 || !dia) {
@@ -325,13 +345,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (formBuscaTreino) {
     formBuscaTreino.addEventListener("submit", async (evento) => {
       evento.preventDefault();
-      limparMensagem(mensagemTreinos);
+      limparMensagem(mensagemConsultaTreinos);
 
       const idAluno = Number(buscaIdAlunoTreino?.value);
 
       if (!idAluno || idAluno <= 0) {
         exibirMensagem(
-          mensagemTreinos,
+          mensagemConsultaTreinos,
           "Informe um ID de aluno válido.",
           "erro"
         );
@@ -356,7 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
         atualizarResumo(treinos);
 
         exibirMensagem(
-          mensagemTreinos,
+          mensagemConsultaTreinos,
           treinos.length
             ? `${treinos.length} treino(s) encontrado(s) para o aluno ${idAluno}.`
             : `Nenhum treino encontrado para o aluno ${idAluno}.`,
@@ -372,7 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         exibirMensagem(
-          mensagemTreinos,
+          mensagemConsultaTreinos,
           `Erro na busca: ${erro.message}`,
           "erro"
         );
@@ -380,21 +400,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* LIMPAR BUSCA */
+  /* =====================================================
+     LIMPAR BUSCA
+     ===================================================== */
   if (btnLimparBusca) {
     btnLimparBusca.addEventListener("click", () => {
       if (formBuscaTreino) formBuscaTreino.reset();
 
-      limparMensagem(mensagemTreinos);
+      limparMensagem(mensagemConsultaTreinos);
       listarTreinos();
     });
   }
 
-  /* BOTÃO LISTAR TODOS */
+  /* =====================================================
+     BOTÃO LISTAR TODOS
+     ===================================================== */
   if (btnListarTreinos) {
     btnListarTreinos.addEventListener("click", () => {
       if (formBuscaTreino) formBuscaTreino.reset();
 
+      limparMensagem(mensagemConsultaTreinos);
       listarTreinos();
     });
   }
@@ -419,7 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (treinosDoAluno.length > 1) {
       exibirMensagem(
-        mensagemTreinos,
+        mensagemConsultaTreinos,
         "Este aluno possui mais de um treino. A API atual atualiza pelo ID do aluno, então editar pode afetar outros treinos dele.",
         "erro"
       );
@@ -440,12 +465,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (editarDiaSemanaTreino) {
       /*
-       * Normaliza o valor retornado pelo banco para
-       * corresponder ao value da opção no <select>.
+       * IMPORTANTE:
+       * Os valores das opções do HTML devem corresponder
+       * ao valor normalizado, por exemplo value="terca".
        */
-      editarDiaSemanaTreino.value = normalizarDiaSemana(
+      const diaNormalizado = normalizarDiaSemana(
         obterDiaTreino(treino)
       );
+
+      const opcaoCorrespondente = Array.from(
+        editarDiaSemanaTreino.options
+      ).find(
+        (opcao) =>
+          normalizarDiaSemana(opcao.value) === diaNormalizado
+      );
+
+      editarDiaSemanaTreino.value = opcaoCorrespondente
+        ? opcaoCorrespondente.value
+        : "";
     }
 
     limparMensagem(mensagemEdicao);
@@ -468,8 +505,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const idAluno = Number(editarIdAlunoTreino?.value);
       const nome = editarNomeTreino?.value.trim();
-
-      // Converte "Quarta-feira" para "quarta", por exemplo.
       const novoDia = normalizarDiaSemana(
         editarDiaSemanaTreino?.value
       );
@@ -515,7 +550,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* CANCELAR EDIÇÃO */
+  /* =====================================================
+     CANCELAR EDIÇÃO
+     ===================================================== */
   if (btnCancelarEdicao) {
     btnCancelarEdicao.addEventListener("click", () => {
       if (formEditarTreino) formEditarTreino.reset();
@@ -543,7 +580,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!treino || !idTreino) {
         exibirMensagem(
-          mensagemTreinos,
+          mensagemConsultaTreinos,
           "Não foi possível identificar o treino selecionado.",
           "erro"
         );
@@ -562,6 +599,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!confirmou) return;
 
+        // Limpa uma mensagem anterior antes de tentar excluir.
+        limparMensagem(mensagemConsultaTreinos);
+
         try {
           await requisicaoAPI(
             `/treinos/${encodeURIComponent(idTreino)}`,
@@ -571,7 +611,7 @@ document.addEventListener("DOMContentLoaded", () => {
           );
 
           exibirMensagem(
-            mensagemTreinos,
+            mensagemConsultaTreinos,
             "Treino excluído com sucesso!",
             "sucesso"
           );
@@ -586,7 +626,7 @@ document.addEventListener("DOMContentLoaded", () => {
           await listarTreinos();
         } catch (erro) {
           exibirMensagem(
-            mensagemTreinos,
+            mensagemConsultaTreinos,
             `Não foi possível excluir: ${erro.message}`,
             "erro"
           );
@@ -595,6 +635,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* INICIALIZAÇÃO */
+  /* =====================================================
+     INICIALIZAÇÃO
+     ===================================================== */
   listarTreinos();
 });
